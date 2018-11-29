@@ -93,3 +93,11 @@ class Player:
     # get players hp
     def get_armor(self):
         return self._armor  # returns players armor
+
+    def do_damage(self, amount: int):
+        damage_hp = amount - self.get_armor()
+
+        self.subtract_armor(amount)
+
+        if damage_hp > 0:
+            self.subtract_hp(damage_hp)
