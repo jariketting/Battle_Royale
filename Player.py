@@ -27,6 +27,11 @@ Armor
         obj.subtract_armor(int amount)
     Get armor
         obj.get_armor()
+
+Doing damage to a player
+    Damage first subtracts from the armor and then from the health, this will be automatically calculated and set with
+    this function
+        obj.do_damage(int amount)
 """
 
 
@@ -94,6 +99,7 @@ class Player:
     def get_armor(self):
         return self._armor  # returns players armor
 
+    # do damage to a player
     def do_damage(self, amount: int):
         damage_hp = amount - self.get_armor()
 
