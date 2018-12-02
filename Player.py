@@ -32,6 +32,9 @@ Doing damage to a player
     Damage first subtracts from the armor and then from the health, this will be automatically calculated and set with
     this function
         obj.do_damage(int amount)
+
+Checking if player is alive
+    is_alive() returns true if alive and false if not
 """
 
 
@@ -107,3 +110,7 @@ class Player:
 
         if damage_hp > 0:
             self.subtract_hp(damage_hp)
+
+    # get if player is alive
+    def is_alive(self):
+        return self._hp > 0
