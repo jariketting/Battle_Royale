@@ -2,9 +2,15 @@
 Weapon class
 
 Stores all weapons values
+
+Get name of weapon:
+    weapon.get_name()
+Get damage weapon does (number between zero and two)
+    weapon.get_damage(INT)
 """
 
 
+# Don't use this class in code
 class Weapon:
     _name = ''  # stores weapons name
     _damage_same_tile = 0  # stores damage when on same tile
@@ -28,6 +34,7 @@ class Weapon:
             return 0  # default value if for whatever reason number is wrong
 
 
+# setup shotgun
 class Shotgun(Weapon):
     def __init__(self):
         self._name = 'Shotgun'
@@ -36,6 +43,7 @@ class Shotgun(Weapon):
         self._damage_second_tile = 0
 
 
+# setup Assault rifle
 class AssaultRifle(Weapon):
     def __init__(self):
         self._name = 'Assault rifle'
@@ -44,6 +52,7 @@ class AssaultRifle(Weapon):
         self._damage_second_tile = 3
 
 
+# setup sniper rifle
 class SniperRifle(Weapon):
     def __init__(self):
         self._name = 'Sniper rifle'
