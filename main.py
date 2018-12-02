@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # File: main.py
 import os
-import tkinter as tk
 import pygubu
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
