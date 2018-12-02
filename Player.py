@@ -1,3 +1,5 @@
+from Weapons import Weapon
+
 """
 Player class
 
@@ -118,3 +120,11 @@ class Player:
     # get if player is alive
     def is_alive(self):
         return self._hp > 0
+
+    # get players weapon
+    def get_weapon(self):
+        return self._weapon
+
+    # set players weapon
+    def set_weapon(self, weapon: Weapon):
+        self._weapon = weapon
