@@ -38,6 +38,7 @@ Checking if player is alive
 """
 
 import Weapons
+import Items
 
 
 class Player:
@@ -128,3 +129,19 @@ class Player:
     # set players weapon
     def set_weapon(self, weapon: Weapons):
         self._weapon = weapon
+
+    # get players first item
+    def get_first_item(self):
+        return self._first_item
+
+    # set players first item
+    def set_first_item(self, item: Items):
+        self._first_item = item
+
+    # get players second item
+    def get_second_item(self):
+        return self._second_item
+
+    # set players second item
+    def set_second_item(self, item: Items):
+        self._second_item = item
