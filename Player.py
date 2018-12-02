@@ -46,6 +46,8 @@ class Player:
     _armor = 0  # stores player armor
 
     _weapon = None  # stores players weapon
+    _first_item = None  # stores players first item
+    _second_item = None  # stores players second item
 
     _max_hp = 10  # maximum hp player can have
     _max_armor = 6  # maximum armor player can have
