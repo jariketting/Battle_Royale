@@ -7,6 +7,10 @@ Items class
 class Item:
     _name = ''
 
+    # get name of item
+    def get_name(self):
+        return self._name
+
 
 # setup armor
 class Armor(Item):
