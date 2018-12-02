@@ -16,13 +16,18 @@ class App:
         builder.add_from_file(os.path.join(CURRENT_DIR, 'main.ui'))
 
         # 3: Create the toplevel widget.
-        self.mainwindow = builder.get_object('mainwindow')
+        self.main_window = builder.get_object('main_window')
+
+        self.builder.connect_callbacks(self)
+
+    def add_player(self):
+        print('add player')
 
     def quit(self, event=None):
-        self.mainwindow.quit()
+        self.main_window.quit()
 
     def run(self):
-        self.mainwindow.mainloop()
+        self.main_window.mainloop()
 
 
 if __name__ == '__main__':
