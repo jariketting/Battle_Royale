@@ -45,6 +45,8 @@ class Player:
     _hp = 10  # stores players health
     _armor = 0  # stores player armor
 
+    _weapon = None  # stores players weapon
+
     _max_hp = 10  # maximum hp player can have
     _max_armor = 6  # maximum armor player can have
 
