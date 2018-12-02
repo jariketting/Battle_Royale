@@ -5,7 +5,7 @@ Stores all weapons values
 
 Get name of weapon:
     weapon.get_name()
-Get damage weapon does (number between zero and two)
+Get damage weapon does (number between zero and two for amount of tiles away)
     weapon.get_damage(INT)
 """
 
