@@ -1,5 +1,8 @@
 """
 Items class
+
+Get items name
+    obj.get_name()
 """
 
 
