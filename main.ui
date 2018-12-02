@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="tk.Toplevel" id="mainwindow">
+    <property name="height">768</property>
+    <property name="width">1366</property>
+  </object>
+</interface>
