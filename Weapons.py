@@ -26,3 +26,29 @@ class Weapon:
             return self._damage_second_tile  # damage done two tiles away
         else:
             return 0  # default value if for whatever reason number is wrong
+
+
+class Shotgun(Weapon):
+    def __init__(self):
+        self._name = 'Shotgun'
+        self._damage_same_tile = 7
+        self._damage_first_tile = 3
+        self._damage_second_tile = 0
+
+
+class AssaultRifle(Weapon):
+    def __init__(self):
+        self._name = 'Assault rifle'
+        self._damage_same_tile = 3
+        self._damage_first_tile = 5
+        self._damage_second_tile = 3
+
+
+class SniperRifle(Weapon):
+    def __init__(self):
+        self._name = 'Sniper rifle'
+        self._damage_same_tile = 1
+        self._damage_first_tile = 4
+        self._damage_second_tile = 7
+
+

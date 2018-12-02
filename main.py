@@ -1,11 +1,8 @@
 from Player import Player
+from Weapons import Shotgun
 
-test = Player()
+test = Shotgun()
 
-print(test.get_hp())
-print(test.is_alive())
+print(test.get_damage(0))
 
-test.do_damage(10)
 
-print(test.get_hp())
-print(test.is_alive())
