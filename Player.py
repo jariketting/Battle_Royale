@@ -1,5 +1,3 @@
-from Weapons import Weapon
-
 """
 Player class
 
@@ -38,6 +36,8 @@ Doing damage to a player
 Checking if player is alive
     is_alive() returns true if alive and false if not
 """
+
+import Weapons
 
 
 class Player:
@@ -126,5 +126,5 @@ class Player:
         return self._weapon
 
     # set players weapon
-    def set_weapon(self, weapon: Weapon):
+    def set_weapon(self, weapon: Weapons):
         self._weapon = weapon
