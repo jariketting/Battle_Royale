@@ -1,13 +1,13 @@
 """
 Player class
 
-name:
+name
     Set the players name:
         obj.set_name(string NAME)
     Get the players name:
         obj.get_name()
 
-color:
+color
     Set color:
         obj.set_color(string COLOR)
     Get color
@@ -35,6 +35,22 @@ Doing damage to a player
 
 Checking if player is alive
     is_alive() returns true if alive and false if not
+
+Items and weapons
+    Set weapon:
+        obj.set_weapon(Weapons weapon)
+    Get weapon:
+        obj.get_weapon()
+
+    Set first item
+        obj.set_first_item(Items item)
+    Get first item
+        obj.get_first_item()
+
+    Set second item
+        obj.set_second_item(Items item)
+    Get second item
+        obj.get_second_item()
 """
 
 import Weapons

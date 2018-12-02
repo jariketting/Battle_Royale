@@ -1,8 +1,10 @@
 from Player import Player
-from Weapons import Shotgun
+import Weapons
+import Items
 
-test = Shotgun()
+test = Player()
 
-print(test.get_damage(0))
+test.set_first_item(Items.Armor())
 
+print(test.get_first_item().get_name())
 
