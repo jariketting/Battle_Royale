@@ -1,5 +1,7 @@
 """
 Game controller class
+
+Class made by Jari
 """
 
 

@@ -1,6 +1,8 @@
 """
 Player class
 
+Class made by Jari
+
 name
     Set the players name:
         obj.set_name(string NAME)

@@ -1,6 +1,8 @@
 """
 Items class
 
+Class made by Jari
+
 Get items name
     obj.get_name()
 """

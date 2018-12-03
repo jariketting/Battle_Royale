@@ -1,6 +1,8 @@
 """
 Weapon class
 
+Class made by Jari
+
 Stores all weapons values
 
 Get name of weapon:
