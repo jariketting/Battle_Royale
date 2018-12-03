@@ -5,53 +5,73 @@ clear = "\n" * 100
 
 
 class App:
-    _run = True
-    _state = 'main_menu'
-    _controller = Controller()
+    state = 'splash_screen'
+    run = True
+    controller = Controller()
 
     def __init__(self):
-        self.splash_screen()
+        while self.run:
+            if self.state == 'splash_screen':
+                self.splash_screen()
 
-        while self._run:
-            print(clear)
-            self.show_actions()
-            user_input = input()
-
-            if self._state == 'main_menu':
-                if user_input == 'start':
-                    if len(self._controller.get_players()) > 2:
-                        print(clear)
-                        print('Game started')
-                        time.sleep(3)
-                    else:
-                        print(clear)
-                        print('Please add a minimum of two players.')
-                        time.sleep(3)
-                elif user_input == 'add_player':
-                    self.add_player()
-
-            if user_input == 'quit':
-                self._run = False
+            elif self.state == 'main_menu':
+                self.main_menu()
 
     def splash_screen(self):
         print(clear)
         print('Welcome to Board Royale!')
         time.sleep(3)
-
-    def show_actions(self):
-        print('Please use any of the following actions:')
-
-        if self._state == 'main_menu':
-            print('add_player, start, quit')
-
-    def add_player(self):
         print(clear)
-        print('Enter name of player')
+        self.state = 'main_menu'
 
-        name = input()
+    def main_menu(self):
+        run = True
 
-        self._controller.add_player(name)
-        print('Added ' + name)
+        while run:
+            print(clear)
+
+            print('> main menu')
+            if len(self.controller.get_players()) > 0:
+                print('Current players:')
+
+                for idx, obj in enumerate(self.controller.get_players()):
+                    print(idx, ' ', obj.get_name())
+
+            else:
+                print('No players added yet.')
+
+            user_input = input('Type an action')
+
+            if user_input == 'quit':
+                run = False
+                self.run = False
+
+            elif user_input == 'help':
+                print('Commands allowed: start, quit, add player.')
+                input('Press enter to continue...')
+
+            elif user_input == 'add player':
+                if len(self.controller.get_players()) < 8:
+                    name = input('Type the name of the player')
+
+                    self.controller.add_player(name)
+                else:
+                    print('Maximum players reached.')
+                    input('Press enter to continue...')
+
+            elif user_input == 'start':
+
+                if len(self.controller.get_players()) > 2:
+                    self.state = 'game'
+                    run = False
+
+                else:
+                    print('Please add a minimum of two players.')
+                    input('Press enter to continue...')
+
+            else:
+                print('Invalid input. Use "help" to show allowed inputs.')
+                input('Press enter to continue...')
 
 
 if __name__ == '__main__':
