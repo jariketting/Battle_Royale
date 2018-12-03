@@ -4,6 +4,8 @@ Game controller class
 Class made by Jari
 """
 
+from Player import Player
+
 
 class Controller:
     # these are private variables and should not be accessed outside this class.
@@ -18,3 +20,11 @@ class Controller:
     # get current round
     def get_round(self):
         return self._round
+
+    def get_players(self):
+        return self._players
+
+    def add_player(self, name: str):
+        self._players.append(Player())
+
+        self._players[-1].set_name(name)
