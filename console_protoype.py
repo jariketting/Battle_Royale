@@ -95,6 +95,10 @@ class App:
                 run = False
                 self.run = False
 
+            elif user_input == 'help':
+                print('Commands allowed: quit.')
+                input('Press enter to continue...')
+
             else:
                 print('Invalid input. Use "help" to show allowed inputs.')
                 input('Press enter to continue...')
