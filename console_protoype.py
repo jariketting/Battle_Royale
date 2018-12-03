@@ -91,6 +91,14 @@ class App:
 
             user_input = input('Type an action')
 
+            if user_input == 'quit':
+                run = False
+                self.run = False
+
+            else:
+                print('Invalid input. Use "help" to show allowed inputs.')
+                input('Press enter to continue...')
+
 
 if __name__ == '__main__':
     app = App()
