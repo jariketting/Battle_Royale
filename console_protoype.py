@@ -17,6 +17,9 @@ class App:
             elif self.state == 'main_menu':
                 self.main_menu()
 
+            elif self.state == 'game':
+                self.game()
+
     def splash_screen(self):
         print(clear)
         print('Welcome to Board Royale!')
@@ -34,8 +37,8 @@ class App:
             if len(self.controller.get_players()) > 0:
                 print('Current players:')
 
-                for idx, obj in enumerate(self.controller.get_players()):
-                    print(idx, ' ', obj.get_name())
+                for idx, player in enumerate(self.controller.get_players()):
+                    print(idx, ' ', player.get_name())
 
             else:
                 print('No players added yet.')
@@ -61,7 +64,7 @@ class App:
 
             elif user_input == 'start':
 
-                if len(self.controller.get_players()) > 2:
+                if len(self.controller.get_players()) >= 2:
                     self.state = 'game'
                     run = False
 
@@ -72,6 +75,21 @@ class App:
             else:
                 print('Invalid input. Use "help" to show allowed inputs.')
                 input('Press enter to continue...')
+
+    def game(self):
+        run = True
+
+        while run:
+            print(clear)
+            print('> game')
+            print('')
+            print('Current round: ', self.controller.get_round())
+            print('------------------------------')
+            print('Players:')
+            for idx, player in enumerate(self.controller.get_players()):
+                print('- ', player.get_name(), ' | HP: ', player.get_hp(), ' | Armor: ', player.get_armor(),)
+
+            user_input = input('Type an action')
 
 
 if __name__ == '__main__':
