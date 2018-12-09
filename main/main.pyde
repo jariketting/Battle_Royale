@@ -13,7 +13,7 @@ def setup():
 def draw():
     global state
     
-    if state == 0:        
+    if state == 0:
         time.sleep(3)
         state = 1
         clear()
