@@ -17,9 +17,15 @@ def draw():
         time.sleep(3)
         state = 1
         clear()
+    elif state == 1:
+        player_screen()
 
     
 def splash_screen():
     img = loadImage("images/splash_screen.png")
+    image(img, 0, 0)
+    
+def player_screen():
+    img = loadImage("images/player_screen.png")
     image(img, 0, 0)
     
