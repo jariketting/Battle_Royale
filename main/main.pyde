@@ -15,10 +15,17 @@ Setup the application and change any settings according to the designs specs.
 """
 def setup():
     size(1366, 768)  # set size of application according to designs specs
-    background(19, 19, 19)  # set background color of application
+    background(19)  # set background color of application
     
     # add one player on default
     controller.add_player('Player 1')
+    controller.add_player('Player 2')
+    controller.add_player('Player 3')
+    controller.add_player('Player 4')
+    controller.add_player('Player 5')
+    controller.add_player('Player 6')
+    controller.add_player('Player 7')
+    controller.add_player('Player 8')
     
     # start application with splash screen
     splash_screen()
@@ -69,14 +76,24 @@ def player_screen():
     start_button = loadImage(image_dir+"start_button.png")
     image(start_button, 1112, 683)
 
+    player_font = createFont("Arial Bold", 28, True)
+    textFont(player_font,36)
     player_image = loadImage(image_dir+"player_name.png")
 
     ypos = 140
+    xpos = 429
 
     for player in controller.get_players():
-        image(player_image, 429, ypos)
+        image(player_image, xpos, ypos)
+        
+        fill(200)
+        text(player.get_name(), xpos + 67, ypos + 40)
+        
+        fill(255, 0, 0)
+        rect(xpos, ypos, 54, 53)
+        
         ypos += 74
     
     if len(controller.get_players()) < 8:
         add_player_image = loadImage(image_dir+"add_player_button.png")
-        image(add_player_image, 429, ypos)
+        image(add_player_image, xpos, ypos)
