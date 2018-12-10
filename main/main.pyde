@@ -55,18 +55,16 @@ def draw():
 def mouseReleased():
     global buttons, state, controller
     
-    for index, button in enumerate(buttons):
-        if state == 1:
-            
-            if mouseX >= button[0] and mouseX <= button[2] and mouseY >= button[1] and mouseY <= button[3]:
-                if index == 0:
-                    if len(controller.get_players()) >= 2:
-                        state = 2
-                        clear()
-                elif index == 1:
-                    if len(controller.get_players()) < 8:
-                        controller.add_player("Player " + str(len(controller.get_players()) + 1))
-                        
+    for button, cords in enumerate(buttons):            
+            if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
+                if state == 1:
+                    if button == 0:
+                        if len(controller.get_players()) >= 2:
+                            state = 2
+                            clear()
+                    elif button == 1:
+                        if len(controller.get_players()) < 8:
+                            controller.add_player("Player " + str(len(controller.get_players()) + 1))
 
  
 """
