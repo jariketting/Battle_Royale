@@ -10,6 +10,7 @@ state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
+# stores all buttons withing app
 buttons = [
     [0, 0, 0, 0],  # start button
     [0, 0, 0, 0]  # add player button
@@ -51,20 +52,32 @@ def draw():
         player_screen()
         
         
-        
+"""
+When the player clicks on the screen, this function will check if a button was clicked.
+
+Buttons are stored in the buttons var. And are pointed to by it's index key
+"""
 def mouseReleased():
+    # get required global vars
     global buttons, state, controller
     
-    for button, cords in enumerate(buttons):            
-            if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
-                if state == 1:
-                    if button == 0:
-                        if len(controller.get_players()) >= 2:
-                            state = 2
-                            clear()
-                    elif button == 1:
-                        if len(controller.get_players()) < 8:
-                            controller.add_player("Player " + str(len(controller.get_players()) + 1))
+    # go trough each button and check if it is pressed
+    for button, cords in enumerate(buttons):
+        # check if players clicked location falls withing the buttons cords
+        if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
+            # some buttons can only be pressed in specific stages of the application, check what state the game is in
+            if state == 1:
+                # check if button is button 0
+                if button == 0:
+                    # check if min players count is met
+                    if len(controller.get_players()) >= 2:
+                        state = 2  # change state to two to start the game
+                        clear()  # clear current screen
+                # check if button is button 1
+                elif button == 1:
+                    # only allow the button to be pressed when the player count is lower than eight
+                    if len(controller.get_players()) < 8:
+                        controller.add_player("Player " + str(len(controller.get_players()) + 1))
 
  
 """
@@ -84,37 +97,44 @@ Payer screen (state 1)
 In this screen the player will add up to 8 players (min = 2) and can start the game
 """    
 def player_screen():
+    # get required global vars
     global buttons
     
+    # set background
     bg = loadImage(image_dir+"player_screen.png")
     image(bg, 0, 0)
     
+    # create start button
     start_button = loadImage(image_dir+"start_button.png")
-    image(start_button, 1112, 683)
-    buttons[0] = [1112, 683, 1349, 751]
+    buttons[0] = [1112, 683, 1349, 751]  # set cords for start button
+    image(start_button, buttons[0][0], buttons[0][1])
 
+    # create font for player names
     player_font = createFont("Arial Bold", 28, True)
     textFont(player_font,36)
     player_image = loadImage(image_dir+"player_name.png")
 
+    # starting cords for the player list
     ypos = 140
     xpos = 429
 
+    # display each player on screen
     for player in controller.get_players():
         image(player_image, xpos, ypos)
         
-        fill(200)
-        text(player.get_name(), xpos + 67, ypos + 40)
+        fill(200)  # set color of name displayed
+        text(player.get_name(), xpos + 67, ypos + 40)  # display players name
         
-        fill(*player.get_color())
-        rect(xpos, ypos, 55, 53)
+        fill(*player.get_color())  # fill with players color
+        rect(xpos, ypos, 55, 53)  # create rect with players color
         
-        ypos += 74
+        ypos += 74  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
     
-    if len(controller.get_players()) < 8:
+    # show add player button when player count is under 8
+    if len(controller.get_players()) < 8
         buttons[1] = [xpos, ypos, xpos + 212, ypos + 45]
         add_player_image = loadImage(image_dir+"add_player_button.png")
         image(add_player_image, xpos, ypos)
     else:
-        buttons[1] = [0,0,0,0]
+        buttons[1] = [0,0,0,0] # make sure button can not be pressed
     
