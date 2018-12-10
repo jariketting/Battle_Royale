@@ -2,7 +2,6 @@
 Main file of the application.
 """
 
-
 # imports
 import time
 from Controller import Controller
@@ -53,6 +52,7 @@ Splash screen (state 0)
 This is the screen the user will first be presented with when launching the application.
 """   
 def splash_screen():    
+    # draw splash screen image
     bg = loadImage(image_dir+"splash_screen.png")
     image(bg, 0, 0)
     
@@ -71,8 +71,12 @@ def player_screen():
 
     player_image = loadImage(image_dir+"player_name.png")
 
+    ypos = 140
+
     for player in controller.get_players():
-        image(player_image, 429, 209)
+        image(player_image, 429, ypos)
+        ypos += 74
     
-    add_player_image = loadImage(image_dir+"add_player_button.png")
-    image(add_player_image, 429, 283)
+    if len(controller.get_players()) < 8:
+        add_player_image = loadImage(image_dir+"add_player_button.png")
+        image(add_player_image, 429, ypos)
