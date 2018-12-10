@@ -55,9 +55,6 @@ Items and weapons
         obj.get_second_item()
 """
 
-import Weapons
-import Items
-
 
 class Player:
     # these are private variables and should not be accessed outside this class.
