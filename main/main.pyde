@@ -89,8 +89,8 @@ def player_screen():
         fill(200)
         text(player.get_name(), xpos + 67, ypos + 40)
         
-        fill(255, 0, 0)
-        rect(xpos, ypos, 54, 53)
+        fill(*player.get_color())
+        rect(xpos, ypos, 54, 54)
         
         ypos += 74
     
