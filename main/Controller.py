@@ -13,6 +13,18 @@ class Controller:
     _turn = 0  # stores player that is turning ?randomize this number to have a random player start
     _players = []  # stores players in game
 
+    # stores colors
+    _color = [
+        [191, 0, 0],  # red
+        [51, 193, 0],  # green
+        [0, 140, 183],  # blue
+        [244, 225, 48],  # yellow
+        [161, 0, 183],  # purple
+        [255, 255, 255],  # black
+        [0, 0, 0],  # white
+        [191, 92, 0]  # orange
+    ]
+
     # turn to next round
     def next_round(self):
         self._round += 1
@@ -28,3 +40,4 @@ class Controller:
         self._players.append(Player())
 
         self._players[-1].set_name(name)
+        self._players[-1].set_color(*self._color[len(self.get_players()) - 1])
