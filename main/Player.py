@@ -62,7 +62,7 @@ import Items
 class Player:
     # these are private variables and should not be accessed outside this class.
     _name = 'player name'  # stores player name
-    _color = 'ffffff'  # stores player color ?RGB of hex color
+    _color = [0, 0, 0]  # stores player color ?RGB of hex color
     _hp = 10  # stores players health
     _armor = 0  # stores player armor
 
