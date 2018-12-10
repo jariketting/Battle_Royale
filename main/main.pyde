@@ -10,6 +10,11 @@ state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
+buttons = [
+    [0, 0, 0, 0],  # start button
+    [0, 0, 0, 0]  # add player button
+]
+
 """
 Setup the application and change any settings according to the designs specs.
 """
@@ -19,13 +24,6 @@ def setup():
     
     # add one player on default
     controller.add_player('Player 1')
-    controller.add_player('Player 2')
-    controller.add_player('Player 3')
-    controller.add_player('Player 4')
-    controller.add_player('Player 5')
-    controller.add_player('Player 6')
-    controller.add_player('Player 7')
-    controller.add_player('Player 8')
     
     # start application with splash screen
     splash_screen()
@@ -51,6 +49,24 @@ def draw():
         # player screen
         
         player_screen()
+        
+        
+        
+def mouseReleased():
+    global buttons, state, controller
+    
+    for index, button in enumerate(buttons):
+        if state == 1:
+            
+            if mouseX >= button[0] and mouseX <= button[2] and mouseY >= button[1] and mouseY <= button[3]:
+                if index == 0:
+                    if len(controller.get_players()) >= 2:
+                        state = 2
+                        clear()
+                elif index == 1:
+                    if len(controller.get_players()) < 8:
+                        controller.add_player("Player " + str(len(controller.get_players()) + 1))
+                        
 
  
 """
@@ -70,11 +86,14 @@ Payer screen (state 1)
 In this screen the player will add up to 8 players (min = 2) and can start the game
 """    
 def player_screen():
+    global buttons
+    
     bg = loadImage(image_dir+"player_screen.png")
     image(bg, 0, 0)
     
     start_button = loadImage(image_dir+"start_button.png")
     image(start_button, 1112, 683)
+    buttons[0] = [1112, 683, 1349, 751]
 
     player_font = createFont("Arial Bold", 28, True)
     textFont(player_font,36)
@@ -95,5 +114,9 @@ def player_screen():
         ypos += 74
     
     if len(controller.get_players()) < 8:
+        buttons[1] = [xpos, ypos, xpos + 212, ypos + 45]
         add_player_image = loadImage(image_dir+"add_player_button.png")
         image(add_player_image, xpos, ypos)
+    else:
+        buttons[1] = [0,0,0,0]
+    
