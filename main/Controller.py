@@ -20,9 +20,9 @@ class Controller:
         [0, 140, 183],  # blue
         [244, 225, 48],  # yellow
         [161, 0, 183],  # purple
+        [191, 92, 0],  # orange
         [255, 255, 255],  # black
-        [0, 0, 0],  # white
-        [191, 92, 0]  # orange
+        [0, 0, 0]  # white
     ]
 
     # turn to next round
