@@ -82,8 +82,8 @@ class Player:
         return self._name  # returns players name
 
     # sets color of player
-    def set_color(self, color):
-        self._color = color  # overwrite current color with new color
+    def set_color(self, r, g, b):
+        self._color = [r, g, b]  # overwrite current color with new color
 
     # get color of player
     def get_color(self):
