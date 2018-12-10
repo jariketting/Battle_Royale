@@ -5,8 +5,11 @@ Main file of the application.
 
 # imports
 import time
+from Controller import Controller
 
 state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+image_dir = "images/"  # directory images are stored in
+controller = Controller()
 
 """
 Setup the application and change any settings according to the designs specs.
@@ -46,8 +49,8 @@ Splash screen (state 0)
 
 This is the screen the user will first be presented with when launching the application.
 """   
-def splash_screen():
-    bg = loadImage("images/splash_screen.png")
+def splash_screen():    
+    bg = loadImage(image_dir+"splash_screen.png")
     image(bg, 0, 0)
     
     
@@ -57,6 +60,9 @@ Payer screen (state 1)
 In this screen the player will add up to 8 players (min = 2) and can start the game
 """    
 def player_screen():
-    bg = loadImage("images/player_screen.png")
+    bg = loadImage(image_dir+"player_screen.png")
     image(bg, 0, 0)
+    
+    start_button = loadImage(image_dir+"start_button.png")
+    image(start_button, 1112, 683)
     
