@@ -13,7 +13,8 @@ controller = Controller()
 # stores all buttons withing app
 buttons = [
     [0, 0, 0, 0],  # start button
-    [0, 0, 0, 0]  # add player button
+    [0, 0, 0, 0],  # add player button
+    [0, 0, 0, 0]  # remove player button
 ]
 
 """
@@ -117,7 +118,7 @@ def player_screen():
     player_image = loadImage(image_dir+"player_name.png")
 
     # starting cords for the player list
-    ypos = 140
+    ypos = 100
     xpos = 429
 
     # display each player on screen
@@ -139,7 +140,16 @@ def player_screen():
         image(add_player_image, xpos, ypos)
     else:
         buttons[1] = [0,0,0,0] # make sure button can not be pressed
+        
+    # show remove player button when player count is under 8
+    if len(controller.get_players()) > 1:
+        buttons[2] = [742, ypos, 742 + 212, ypos + 45]
+        add_player_image = loadImage(image_dir+"remove_player_button.png")
+        image(add_player_image, 742, ypos)
+    else:
+        buttons[2] = [0,0,0,0] # make sure button can not be pressed
     
+
 def main_screen():
     # draw main screen image
     bg = loadImage(image_dir+"main_screen.png")
