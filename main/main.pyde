@@ -48,8 +48,10 @@ def draw():
         clear()  # screen has to be cleared, otherwise the old screen will still be visible trought the new one
     elif state == 1:
         # player screen
-        
         player_screen()
+    elif state == 2:
+        #main screen
+        main_screen()
     
         
 """
@@ -137,4 +139,9 @@ def player_screen():
         image(add_player_image, xpos, ypos)
     else:
         buttons[1] = [0,0,0,0] # make sure button can not be pressed
+    
+def main_screen():
+    # draw main screen image
+    bg = loadImage(image_dir+"main_screen.png")
+    image(bg, 0, 0)
     
