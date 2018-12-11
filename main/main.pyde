@@ -131,7 +131,7 @@ def player_screen():
         ypos += 74  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
     
     # show add player button when player count is under 8
-    if len(controller.get_players()) < 8
+    if len(controller.get_players()) < 8:
         buttons[1] = [xpos, ypos, xpos + 212, ypos + 45]
         add_player_image = loadImage(image_dir+"add_player_button.png")
         image(add_player_image, xpos, ypos)
