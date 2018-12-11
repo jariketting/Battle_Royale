@@ -23,6 +23,7 @@ Setup the application and change any settings according to the designs specs.
 def setup():
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
+    frameRate(60)  # set framerate
     
     # add one player on default
     controller.add_player('Player 1')
@@ -81,13 +82,18 @@ def mouseReleased():
                     # only allow the button to be pressed when the player count is lower than eight
                     if len(controller.get_players()) < 8:
                         controller.add_player("Player " + str(len(controller.get_players()) + 1))
+                # check if button is button 2
+                elif button == 2:
+                    if len(controller.get_players()) > 1:
+                        controller.remove_player(-1)
+                        clear()
 
  
 """
 Splash screen (state 0)
 
 This is the screen the user will first be presented with when launching the application.
-"""   
+"""
 def splash_screen():    
     # draw splash screen image
     bg = loadImage(image_dir+"splash_screen.png")
