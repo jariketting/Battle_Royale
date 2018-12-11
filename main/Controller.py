@@ -41,3 +41,6 @@ class Controller:
 
         self._players[-1].set_name(name)
         self._players[-1].set_color(*self._color[len(self.get_players()) - 1])
+        
+    def remove_player(self, number):
+        del self._players[number]
