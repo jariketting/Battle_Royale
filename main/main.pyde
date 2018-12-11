@@ -35,7 +35,7 @@ This function will keep looping until the application has been terminated.
 
 The main functionality is to call the correct function based on the state of the game, together with some other small stuff (like the timer showing the splash screen for 3 secs)
 """
-def draw():    
+def draw():
     # global variables
     global state
     
@@ -50,7 +50,7 @@ def draw():
         # player screen
         
         player_screen()
-        
+    
         
 """
 When the player clicks on the screen, this function will check if a button was clicked.
