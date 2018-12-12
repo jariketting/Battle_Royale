@@ -120,7 +120,7 @@ def player_screen():
 
     # create font for player names
     player_font = createFont("Arial Bold", 28, True)
-    textFont(player_font, 36)
+    textFont(player_font)
     
     player_image = loadImage(image_dir+"player_name.png")
 
@@ -133,7 +133,7 @@ def player_screen():
         image(player_image, xpos, ypos)
         
         fill(200)  # set color of name displayed
-        text(player.get_name(), xpos + 67, ypos + 40)  # display players name
+        text(player.get_name(), xpos + 67, ypos + 37)  # display players name
         
         fill(*player.get_color())  # fill with players color
         rect(xpos, ypos, 55, 53)  # create rect with players color
@@ -158,7 +158,17 @@ def player_screen():
     
 
 def main_screen():
+    global controller
+    
     # draw main screen image
     bg = loadImage(image_dir+"main_screen.png")
     image(bg, 0, 0)
+    
+    # create font for turn
+    font = createFont("Arial Bold", 50, True)
+    textFont(font)
+    fill(0)
+    textAlign(CENTER)
+    
+    text(controller.get_round(), 1210, 220) 
     
