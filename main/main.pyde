@@ -30,7 +30,7 @@ y_offset = 0
 Setup the application and change any settings according to the designs specs.
 """
 def setup():    
-    global state, dices
+    global dices
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
@@ -43,8 +43,7 @@ def setup():
     dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
     
     # start application with splash screen
-    #splash_screen()
-    state = 3
+    splash_screen()
     
 
 """
@@ -69,7 +68,7 @@ def draw():
     elif state == 2:
         #main screen
         main_screen()
-    elif state == 3:
+    elif state == 4:
         credit_screen()
     
         
@@ -93,7 +92,6 @@ def mouseReleased():
                     # check if min players count is met
                     if len(controller.get_players()) >= 2:
                         state = 2  # change state to two to start the game
-                        clear()  # clear current screen
                 # check if button is button 1
                 elif button == 1:
                     # only allow the button to be pressed when the player count is lower than eight
@@ -103,7 +101,6 @@ def mouseReleased():
                 elif button == 2:
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
-                        clear()
             elif state == 2:
                 if button == 3:
                     timer = 50
@@ -128,6 +125,8 @@ In this screen the player will add up to 8 players (min = 2) and can start the g
 def player_screen():
     # get required global vars
     global buttons
+    
+    clear()
     
     # set background
     bg = loadImage(image_dir+"player_screen.png")
