@@ -20,7 +20,7 @@ buttons = [
 """
 Setup the application and change any settings according to the designs specs.
 """
-def setup():
+def setup():    
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
     frameRate(60)  # set framerate
@@ -164,11 +164,20 @@ def main_screen():
     bg = loadImage(image_dir+"main_screen.png")
     image(bg, 0, 0)
     
-    # create font for turn
+    # display turn
     font = createFont("Arial Bold", 50, True)
     textFont(font)
     fill(0)
     textAlign(CENTER)
     
     text(controller.get_round(), 1210, 220) 
+    
+    # display players health and armor
+    font = createFont("Arial Bold", 40, True)
+    textFont(font)
+    fill(255)
+    textAlign(RIGHT)
+    
+    text(controller.get_current_player().get_hp(), 820, 185) 
+    text(controller.get_current_player().get_armor(), 820, 270) 
     
