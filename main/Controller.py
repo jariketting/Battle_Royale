@@ -34,8 +34,20 @@ class Controller:
     def get_round(self):
         return self._round
 
+    def next_turn(self):
+        self._turn += 1
+        self._current_player += 1
+
+        # TODO implement check if turn exceeds amount of players
+
+    def get_turn(self):
+        return self._turn
+
     def get_players(self):
         return self._players
+
+    def get_current_player(self):
+        return self._players[self._current_player]
 
     def add_player(self, name):
         self._players.append(Player())
