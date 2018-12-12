@@ -12,6 +12,7 @@ class Controller:
     _round = 1  # stores games current round
     _turn = 0  # stores player that is turning ?randomize this number to have a random player start
     _players = []  # stores players in game
+    _current_player = 0  # stores player playing
 
     # stores colors
     _color = [
