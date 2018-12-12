@@ -4,6 +4,7 @@ Main file of the application.
 
 # imports
 import time
+import random
 from Controller import Controller
 
 state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
@@ -14,13 +15,20 @@ controller = Controller()
 buttons = [
     [0, 0, 0, 0],  # start button
     [0, 0, 0, 0],  # add player button
-    [0, 0, 0, 0]  # remove player button
+    [0, 0, 0, 0],  # remove player button
+    [0, 0, 0, 0] # dice
 ]
+
+dices = []
+roll = 1 
+timer = 0
 
 """
 Setup the application and change any settings according to the designs specs.
 """
 def setup():    
+    global state, dices
+    
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
     frameRate(60)  # set framerate
@@ -28,8 +36,12 @@ def setup():
     # add one player on default
     controller.add_player('Player 1')
     
+    # setup dices
+    dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
+    
     # start application with splash screen
-    splash_screen()
+    #splash_screen()
+    state = 2
     
 
 """
@@ -63,7 +75,7 @@ Buttons are stored in the buttons var. And are pointed to by it's index key
 """
 def mouseReleased():
     # get required global vars
-    global buttons, state, controller
+    global buttons, state, controller, timer
     
     # go trough each button and check if it is pressed
     for button, cords in enumerate(buttons):
@@ -87,6 +99,9 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
                         clear()
+            elif state == 2:
+                if button == 3:
+                    timer = 50
 
  
 """
@@ -157,8 +172,23 @@ def player_screen():
         buttons[2] = [0,0,0,0] # make sure button can not be pressed
     
 
+def Dice_roll():
+    Roll = int(random.randint(1, 3))
+    return Roll
+
+
 def main_screen():
-    global controller
+    global controller, dices, roll, timer
+    
+
+    # draw dice    
+    if timer >= 0:
+        if timer % 5 == 0:
+            roll = Dice_roll()
+        timer = timer - 1
+        
+    buttons[3] = [1142, 483, 1283, 624]
+    image(dices[roll-1], 1142, 483, 141, 141)
     
     # draw main screen image
     bg = loadImage(image_dir+"main_screen.png")
