@@ -7,18 +7,18 @@ timer = 0
 
 # the way it is going to look
 def setup():
-    global img, img2,img3
-    size(400,400)
+    global img, img2, img3
+    size(400, 400)
     background(0, 0, 0)
     textSize(28)
     text('The number on the dice is...', 10, 50)
-    fill(255,255,255)
+    fill(255)
     img = loadImage("Dice_1.png")
     img2 = loadImage("Dice_2.png")
     img3 = loadImage("Dice_3.png")
 
 def Dice_roll():
-    Roll = int(random.randint(1,3))   
+    Roll = int(random.randint(1, 3))
     return Roll
 
 
