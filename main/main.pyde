@@ -120,7 +120,8 @@ def player_screen():
 
     # create font for player names
     player_font = createFont("Arial Bold", 28, True)
-    textFont(player_font,36)
+    textFont(player_font, 36)
+    
     player_image = loadImage(image_dir+"player_name.png")
 
     # starting cords for the player list
