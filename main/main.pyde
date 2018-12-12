@@ -24,6 +24,7 @@ dices = []
 roll = 1 
 timer = 0
 radzone = 0
+y_offset = 0
 
 """
 Setup the application and change any settings according to the designs specs.
@@ -43,7 +44,7 @@ def setup():
     
     # start application with splash screen
     #splash_screen()
-    state = 2
+    state = 3
     
 
 """
@@ -68,6 +69,8 @@ def draw():
     elif state == 2:
         #main screen
         main_screen()
+    elif state == 3:
+        credit_screen()
     
         
 """
@@ -213,6 +216,27 @@ def main_screen():
     
     if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:
         draw_radzone()    
+    
+
+def credit_screen():
+    global y_offset
+    
+    clear()
+
+    textAlign(CENTER)
+    fill(255)
+    textSize(150)
+    text('Made by', 683, 1000 + y_offset)
+    textSize(70)
+    text('Dani de Jong', 683, 1100 + y_offset)
+    text('Jari Ketting', 683, 1200 + y_offset)
+    text('Ronan van Kessel', 683, 1300 + y_offset)
+    text('Daphne Miedema', 683, 1400 + y_offset)
+    y_offset = y_offset - 1
+    
+    if y_offset < -1500:
+        y_offset = 0
+
     
 def Dice_roll():
     return int(random.randint(1, 3))
