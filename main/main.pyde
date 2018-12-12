@@ -16,12 +16,14 @@ buttons = [
     [0, 0, 0, 0],  # start button
     [0, 0, 0, 0],  # add player button
     [0, 0, 0, 0],  # remove player button
-    [0, 0, 0, 0] # dice
+    [0, 0, 0, 0],  # dice
+    [0, 0, 0, 0]  # round tracker hover
 ]
 
 dices = []
 roll = 1 
 timer = 0
+radzone = 0
 
 """
 Setup the application and change any settings according to the designs specs.
@@ -170,16 +172,12 @@ def player_screen():
         image(add_player_image, 742, ypos)
     else:
         buttons[2] = [0,0,0,0] # make sure button can not be pressed
-    
-
-def Dice_roll():
-    Roll = int(random.randint(1, 3))
-    return Roll
 
 
 def main_screen():
     global controller, dices, roll, timer
-    
+
+    clear()
 
     # draw dice    
     if timer >= 0:
@@ -210,4 +208,46 @@ def main_screen():
     
     text(controller.get_current_player().get_hp(), 820, 185) 
     text(controller.get_current_player().get_armor(), 820, 270) 
+    
+    buttons[4] = [1136, 267, 1288, 388] 
+    
+    if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:
+        draw_radzone()    
+    
+def Dice_roll():
+    return int(random.randint(1, 3))
+    
+    
+def draw_radzone():
+    global radzone
+    radsize = 16
+    boardsize = 26
+    
+    # the 'window' behind the board
+    textAlign(CENTER,CENTER)
+    font = createFont("Arial", 12, True)
+    textFont(font)
+    fill(127)
+    rect(180, 180, 40 + (boardsize+1) * radsize, 40 + (boardsize + 1) * radsize)
+    
+    # the board loop
+    for xx in range(boardsize+1):
+        for yy in range(boardsize+1):
+            if xx == boardsize and yy != boardsize: #vertical coordinates
+                fill(0)
+                text(chr(yy+65),(xx+0.5)*radsize+200,(yy+0.5)*radsize+200)
+            elif yy == boardsize and xx != boardsize: #horizontal coordinates
+                fill(0)
+                text(str(xx+1),(xx+0.5)*radsize+200,(yy+0.5)*radsize+200)
+            elif xx != boardsize and yy != boardsize: #the tiles
+                fill(127,127,255)
+                rect(xx*radsize+200,yy*radsize+200,radsize,radsize)
+                if (xx >= radzone-1 and xx <= boardsize-radzone) and (yy >= radzone-1 and yy <= boardsize-radzone):
+                    fill(127,255,127)
+                    rect(xx*radsize+200,yy*radsize+200,radsize,radsize)
+                if (xx == radzone-1 or xx == boardsize-radzone) or (yy == radzone-1 or yy == boardsize-radzone):
+                    fill(255,255,127)
+                    rect(xx*radsize+200,yy*radsize+200,radsize,radsize)
+                    
+    textAlign(LEFT, TOP)
     
