@@ -55,13 +55,14 @@ def draw():
     # global variables
     global state
     
+    clear()
+    
     # check what state the game is in
     if state == 0:
         # splash screen has to be displayer for 3 seconds, then the next screen will be shown by chaching the state
         
         time.sleep(3)  # wait 3 seconds
         state = 1  # change state of game to 1
-        clear()  # screen has to be cleared, otherwise the old screen will still be visible trought the new one
     elif state == 1:
         # player screen
         player_screen()
@@ -126,8 +127,6 @@ def player_screen():
     # get required global vars
     global buttons
     
-    clear()
-    
     # set background
     bg = loadImage(image_dir+"player_screen.png")
     image(bg, 0, 0)
@@ -179,8 +178,6 @@ def player_screen():
 def main_screen():
     global controller, dices, roll, timer
 
-    clear()
-
     # draw dice    
     if timer >= 0:
         if timer % 5 == 0:
@@ -219,8 +216,6 @@ def main_screen():
 
 def credit_screen():
     global y_offset
-    
-    clear()
 
     textAlign(CENTER)
     fill(255)
