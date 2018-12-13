@@ -11,6 +11,12 @@ state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
+dices = []
+roll = 1 
+timer = 0
+radzone = 0
+y_offset = 0
+
 # stores all buttons withing app
 buttons = [
     [0, 0, 0, 0],  # start button
@@ -19,12 +25,6 @@ buttons = [
     [0, 0, 0, 0],  # dice
     [0, 0, 0, 0]  # round tracker hover
 ]
-
-dices = []
-roll = 1 
-timer = 0
-radzone = 0
-y_offset = 0
 
 """
 Setup the application and change any settings according to the designs specs.
@@ -56,6 +56,7 @@ def draw():
     global state
     
     clear()
+    background(19)  # set background color of application
     
     # check what state the game is in
     if state == 0:
