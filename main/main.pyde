@@ -36,6 +36,7 @@ def setup():
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
+    noStroke()  # remove stroke
     frameRate(60)  # set framerate
     
     # add one player on default
@@ -264,6 +265,7 @@ def draw_radzone():
     font = createFont("Arial", 12, True)
     textFont(font)
     fill(127)
+    stroke(0);
     rect(180, 180, 40 + (boardsize+1) * radsize, 40 + (boardsize + 1) * radsize)
     
     # the board loop
@@ -286,4 +288,5 @@ def draw_radzone():
                     rect(xx*radsize+200,yy*radsize+200,radsize,radsize)
                     
     textAlign(LEFT, TOP)
+    noStroke()
     
