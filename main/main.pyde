@@ -7,11 +7,11 @@ import time
 import random
 from Controller import Controller
 
-state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+debug = False
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
-dices = []
 roll = 1 
 timer = 0
 radzone = 0
@@ -26,11 +26,13 @@ buttons = [
     [0, 0, 0, 0]  # round tracker hover
 ]
 
+dices = []
+
 """
 Setup the application and change any settings according to the designs specs.
 """
 def setup():    
-    global dices
+    global dices, debug
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
@@ -43,7 +45,8 @@ def setup():
     dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
     
     # start application with splash screen
-    splash_screen()
+    if not debug or state == 0:
+        splash_screen()
     
 
 """
@@ -179,6 +182,8 @@ def player_screen():
 def main_screen():
     global controller, dices, roll, timer
 
+    player = controller.get_current_player()
+
     # draw dice    
     if timer >= 0:
         if timer % 5 == 0:
@@ -199,6 +204,18 @@ def main_screen():
     textAlign(CENTER)
     
     text(controller.get_round(), 1210, 220) 
+    
+    #display current player
+    fill(*player.get_color())  # fill with players color
+    rect(210, 35, 63, 63)  # create rect with players color
+    
+    # create font for player name
+    player_font = createFont("Arial Bold", 40, True)
+    textFont(player_font)
+    
+    fill(0)  # set color of name displayed
+    textAlign(LEFT)
+    text(player.get_name(), 283, 80)  # display players name
     
     # display players health and armor
     font = createFont("Arial Bold", 40, True)
