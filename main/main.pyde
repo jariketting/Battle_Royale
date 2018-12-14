@@ -7,8 +7,7 @@ import time
 import random
 from Controller import Controller
 
-state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
-debug = False
+state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
@@ -32,7 +31,7 @@ dices = []
 Setup the application and change any settings according to the designs specs.
 """
 def setup():    
-    global dices, debug
+    global dices
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
@@ -46,7 +45,7 @@ def setup():
     dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
     
     # start application with splash screen
-    if not debug or state == 0:
+    if state == 0:
         splash_screen()
     
 
