@@ -159,7 +159,7 @@ def player_screen():
         text(player.get_name(), xpos + 67, ypos + 37)  # display players name
         
         fill(*player.get_color())  # fill with players color
-        rect(xpos, ypos, 55, 53)  # create rect with players color
+        rect(xpos, ypos, 56, 53)  # create rect with players color
         
         ypos += 74  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
     
@@ -208,7 +208,7 @@ def main_screen():
     
     #display current player
     fill(*player.get_color())  # fill with players color
-    rect(210, 35, 63, 63)  # create rect with players color
+    rect(210, 35, 64, 64)  # create rect with players color
     
     # create font for player name
     player_font = createFont("Arial Bold", 40, True)
