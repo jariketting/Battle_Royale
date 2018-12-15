@@ -7,7 +7,7 @@ import time
 import random
 from Controller import Controller
 
-state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
