@@ -264,6 +264,18 @@ def main_screen():
     buttons[5] = [1095, 695, 1334, 739]  # set cords for start button
     image(start_button, buttons[5][0], buttons[5][1])
     
+    # radiation zone
+    font = createFont("Arial Bold", 50, True)
+    textFont(font)
+    textAlign(CENTER)
+    
+    if controller.get_radiation_zone():
+        fill(191, 0, 0)
+        text('YES', 1210, 365) 
+    else:
+        fill(0)
+        text('NO', 1210, 365) 
+    
     buttons[4] = [1136, 267, 1288, 400]
     
     if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:

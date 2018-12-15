@@ -5,6 +5,7 @@ Class made by Jari
 """
 
 from Player import Player
+import random
 
 
 class Controller:
@@ -12,6 +13,7 @@ class Controller:
     _round = 1  # stores games current round
     _players = []  # stores players in game
     _current_player = 0  # stores player playing
+    _move_radiation_zone = False  # stores move state of radiation zone
 
     # stores colors
     _color = [
@@ -39,10 +41,20 @@ class Controller:
         else:
             self._current_player = 0
             self._round += 1
-        
+            self._roll_radiation_zone()        
 
     def get_turn(self):
         return self._turn
+
+    def _roll_radiation_zone(self):
+        if random.randrange(1, 3) == 1:
+            self._move_radiation_zone = True
+        else:
+            self._move_radiation_zone = False
+    
+    
+    def get_radiation_zone(self):
+        return self._move_radiation_zone
 
     def get_players(self):
         return self._players
