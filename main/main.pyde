@@ -206,11 +206,11 @@ def main_screen():
     fill(0)
     textAlign(CENTER)
     
-    text(controller.get_round(), 1210, 220) 
+    text(controller.get_round(), 1210, 215) 
     
     # display current player
     fill(*player.get_color())  # fill with players color
-    rect(210, 35, 64, 64)  # create rect with players color
+    rect(210, 36, 63, 63)  # create rect with players color
     
     # create font for player name
     player_font = createFont("Arial Bold", 40, True)
