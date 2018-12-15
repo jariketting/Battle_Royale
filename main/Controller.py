@@ -41,7 +41,11 @@ class Controller:
         else:
             self._current_player = 0
             self._round += 1
-            self._roll_radiation_zone()        
+            self._roll_radiation_zone()
+            
+        # don't allow dead players to play
+        if self.get_current_player().is_dead():
+            self.next_turn()
 
     def get_turn(self):
         return self._turn
