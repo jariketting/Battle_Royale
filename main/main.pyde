@@ -264,9 +264,7 @@ def main_screen():
     buttons[5] = [1095, 695, 1334, 739]  # set cords for start button
     image(start_button, buttons[5][0], buttons[5][1])
     
-    buttons[4] = [1136, 267, 1288, 400] 
-    
-    print(mouseY)
+    buttons[4] = [1136, 267, 1288, 400]
     
     if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:
         draw_radzone()
