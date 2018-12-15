@@ -16,7 +16,7 @@ class Controller:
 
     # stores colors
     _color = [
-        [191, 0, 0],  # red
+        [141, 0, 0],  # red
         [51, 193, 0],  # green
         [0, 140, 183],  # blue
         [244, 225, 48],  # yellow
