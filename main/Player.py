@@ -104,6 +104,12 @@ class Player:
     # get players hp
     def get_hp(self):
         return self._hp  # returns players hp
+    
+    def is_dead(self):
+        if self._hp == 0:
+            return True
+        
+        return False
 
     # adds HP to player
     def add_armor(self, amount):
