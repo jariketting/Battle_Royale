@@ -40,6 +40,7 @@ def setup():
     
     # add one player on default
     controller.add_player('Player 1')
+    controller.get_current_player().subtract_hp(10)
     
     # setup dices
     dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
@@ -242,6 +243,10 @@ def main_screen():
             image(player_image, xpos, ypos)
         
         fill(0)  # set color of name displayed
+        
+        if player.is_dead():
+            fill(222)  # set color of name displayed
+            
         text(player.get_name(), xpos + 55, ypos + 33)  # display players name
         
         fill(*player.get_color())  # fill with players color
