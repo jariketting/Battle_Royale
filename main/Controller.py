@@ -10,7 +10,6 @@ from Player import Player
 class Controller:
     # these are private variables and should not be accessed outside this class.
     _round = 1  # stores games current round
-    _turn = 0  # stores player that is turning ?randomize this number to have a random player start
     _players = []  # stores players in game
     _current_player = 0  # stores player playing
 
@@ -35,10 +34,12 @@ class Controller:
         return self._round
 
     def next_turn(self):
-        self._turn += 1
-        self._current_player += 1
-
-        # TODO implement check if turn exceeds amount of players
+        if self._current_player < len(self.get_players()) - 1:
+            self._current_player += 1
+        else:
+            self._current_player = 0
+            self._round += 1
+        
 
     def get_turn(self):
         return self._turn

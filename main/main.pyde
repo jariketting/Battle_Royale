@@ -22,7 +22,8 @@ buttons = [
     [0, 0, 0, 0],  # add player button
     [0, 0, 0, 0],  # remove player button
     [0, 0, 0, 0],  # dice
-    [0, 0, 0, 0]  # round tracker hover
+    [0, 0, 0, 0],  # round tracker hover
+    [0, 0, 0, 0]  # next turn
 ]
 
 dices = []
@@ -94,23 +95,22 @@ def mouseReleased():
         if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
             # some buttons can only be pressed in specific stages of the application, check what state the game is in
             if state == 1:
-                # check if button is button 0
                 if button == 0:
                     # check if min players count is met
                     if len(controller.get_players()) >= 2:
                         state = 2  # change state to two to start the game
-                # check if button is button 1
                 elif button == 1:
                     # only allow the button to be pressed when the player count is lower than eight
                     if len(controller.get_players()) < 8:
                         controller.add_player("Player " + str(len(controller.get_players()) + 1))
-                # check if button is button 2
                 elif button == 2:
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
                 if button == 3:
                     timer = 50
+                elif button == 5:
+                    controller.next_turn()
 
  
 """
@@ -258,6 +258,11 @@ def main_screen():
     
     text(controller.get_current_player().get_hp(), 820, 185) 
     text(controller.get_current_player().get_armor(), 820, 270) 
+    
+    # next turn button
+    start_button = loadImage(image_dir+"next_turn.png")
+    buttons[5] = [1095, 695, 1334, 739]  # set cords for start button
+    image(start_button, buttons[5][0], buttons[5][1])
     
     buttons[4] = [1136, 267, 1288, 388] 
     
