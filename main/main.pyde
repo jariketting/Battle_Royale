@@ -7,7 +7,7 @@ import time
 import random
 from Controller import Controller
 
-state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
@@ -35,7 +35,6 @@ def setup():
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
-    noStroke()  # remove stroke
     frameRate(60)  # set framerate
     
     # add one player on default
@@ -59,6 +58,7 @@ def draw():
     global state
     
     clear()
+    noStroke()  # remove stroke
     background(19)  # set background color of application
     
     # check what state the game is in
@@ -185,6 +185,7 @@ def main_screen():
     global controller, dices, roll, timer
 
     player = controller.get_current_player()
+    players = controller.get_players()
 
     # draw dice    
     if timer >= 0:
@@ -207,7 +208,7 @@ def main_screen():
     
     text(controller.get_round(), 1210, 220) 
     
-    #display current player
+    # display current player
     fill(*player.get_color())  # fill with players color
     rect(210, 35, 64, 64)  # create rect with players color
     
@@ -218,6 +219,36 @@ def main_screen():
     fill(0)  # set color of name displayed
     textAlign(LEFT)
     text(player.get_name(), 283, 80)  # display players name
+    
+    # display all players
+    reversed_players = players[:]
+    reversed_players.reverse()
+    
+    player_font = createFont("Arial Bold", 28, True)
+    textFont(player_font)
+    
+    player_image = loadImage(image_dir+"player_name_main.png")
+    player_image_selected = loadImage(image_dir+"player_name_main_selected.png")
+
+    # starting cords for the player list
+    ypos = 695
+    xpos = 22
+
+    # display each player on screen
+    for player in reversed_players:
+        if player == controller.get_current_player():
+            image(player_image_selected, xpos-5, ypos-5)
+        else:
+            image(player_image, xpos, ypos)
+        
+        fill(0)  # set color of name displayed
+        text(player.get_name(), xpos + 55, ypos + 33)  # display players name
+        
+        fill(*player.get_color())  # fill with players color
+        rect(xpos, ypos, 45, 45)  # create rect with players color
+        
+        ypos -= 51  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
+        
     
     # display players health and armor
     font = createFont("Arial Bold", 40, True)
