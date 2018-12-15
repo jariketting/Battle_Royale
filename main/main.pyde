@@ -73,6 +73,8 @@ def draw():
     elif state == 2:
         #main screen
         main_screen()
+    elif state == 3:
+        return
     elif state == 4:
         credit_screen()
     
