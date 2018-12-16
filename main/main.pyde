@@ -279,7 +279,7 @@ def main_screen():
         fill(0)
         text('NO', 1210, 365) 
     
-    buttons[4] = [1136, 267, 1288, 400]
+    buttons[4] = [1136, 260, 1288, 400]
     
     if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:
         draw_radzone()
