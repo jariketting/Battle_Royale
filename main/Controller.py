@@ -26,7 +26,7 @@ class Controller:
     ]
 
     # stores items
-    _item = [
+    _items = [
         Items.Armor(),
         Items.BandAid(),
         Items.FirstAidKit()
@@ -93,6 +93,12 @@ class Controller:
     def remove_player(self, number):
         del self._players[number]
         
+    def get_weapons(self):
+        return self._weapons
+
+    def get_items(self):
+        return self._items
+
     def get_radzone(self):
         return self._radzone
     
