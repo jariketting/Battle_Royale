@@ -13,7 +13,6 @@ controller = Controller()
 
 roll = 1 
 timer = 0
-radzone = 0
 y_offset = 0
 
 # stores all buttons withing app
@@ -190,7 +189,7 @@ def main_screen():
     # draw dice    
     if timer >= 0:
         if timer % 5 == 0:
-            roll = Dice_roll()
+            roll = dice_roll()
         timer = timer - 1
         
     buttons[3] = [1142, 483, 1283, 624]
@@ -304,14 +303,17 @@ def credit_screen():
         y_offset = 0
 
     
-def Dice_roll():
+def dice_roll():
     return int(random.randint(1, 3))
     
     
 def draw_radzone():
-    global radzone
+    global controller
+    
     radsize = 16
     boardsize = 26
+    
+    radzone = controller.get_radzone()
     
     # the 'window' behind the board
     textAlign(CENTER,CENTER)

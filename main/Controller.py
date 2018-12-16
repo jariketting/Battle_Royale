@@ -14,6 +14,7 @@ class Controller:
     _players = []  # stores players in game
     _current_player = 0  # stores player playing
     _move_radiation_zone = False  # stores move state of radiation zone
+    _radzone = 0
 
     # stores colors
     _color = [
@@ -53,6 +54,7 @@ class Controller:
     def _roll_radiation_zone(self):
         if random.randrange(1, 3) == 1:
             self._move_radiation_zone = True
+            self._radzone += 1
         else:
             self._move_radiation_zone = False
     
@@ -74,3 +76,6 @@ class Controller:
         
     def remove_player(self, number):
         del self._players[number]
+        
+    def get_radzone(self):
+        return self._radzone
