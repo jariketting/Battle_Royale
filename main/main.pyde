@@ -41,7 +41,7 @@ def setup():
     controller.add_player('Player 1')
     
     # setup dices
-    dices = [loadImage(image_dir+"dices/dice_1.png"), loadImage(image_dir+"dices/dice_2.png"), loadImage(image_dir+"dices/dice_3.png")]
+    dices = [loadImage(image_dir+"main_screen/dices/1.png"), loadImage(image_dir+"main_screen/dices/2.png"), loadImage(image_dir+"main_screen/dices/3.png")]
     
     # start application with splash screen
     if state == 0:
@@ -71,7 +71,7 @@ def draw():
         # player screen
         player_screen()
     elif state == 2:
-        #main screen
+        # main screen
         main_screen()
     elif state == 3:
         return
@@ -119,7 +119,7 @@ This is the screen the user will first be presented with when launching the appl
 """
 def splash_screen():    
     # draw splash screen image
-    bg = loadImage(image_dir+"splash_screen.png")
+    bg = loadImage(image_dir+"splash_screen/bg.png")
     image(bg, 0, 0)
     
     
@@ -133,11 +133,11 @@ def player_screen():
     global buttons
     
     # set background
-    bg = loadImage(image_dir+"player_screen.png")
+    bg = loadImage(image_dir+"player_screen/bg.png")
     image(bg, 0, 0)
     
     # create start button
-    start_button = loadImage(image_dir+"start_button.png")
+    start_button = loadImage(image_dir+"player_screen/start_button.png")
     buttons[0] = [1112, 683, 1349, 751]  # set cords for start button
     image(start_button, buttons[0][0], buttons[0][1])
 
@@ -145,7 +145,7 @@ def player_screen():
     player_font = createFont("Arial Bold", 28, True)
     textFont(player_font)
     
-    player_image = loadImage(image_dir+"player_name.png")
+    player_image = loadImage(image_dir+"player_screen/player.png")
 
     # starting cords for the player list
     ypos = 100
@@ -166,7 +166,7 @@ def player_screen():
     # show add player button when player count is under 8
     if len(controller.get_players()) < 8:
         buttons[1] = [xpos, ypos, xpos + 212, ypos + 45]
-        add_player_image = loadImage(image_dir+"add_player_button.png")
+        add_player_image = loadImage(image_dir+"player_screen/add_player_button.png")
         image(add_player_image, xpos, ypos)
     else:
         buttons[1] = [0,0,0,0] # make sure button can not be pressed
@@ -174,7 +174,7 @@ def player_screen():
     # show remove player button when player count is under 8
     if len(controller.get_players()) > 1:
         buttons[2] = [742, ypos, 742 + 212, ypos + 45]
-        add_player_image = loadImage(image_dir+"remove_player_button.png")
+        add_player_image = loadImage(image_dir+"player_screen/remove_player_button.png")
         image(add_player_image, 742, ypos)
     else:
         buttons[2] = [0,0,0,0] # make sure button can not be pressed
@@ -198,7 +198,7 @@ def main_screen():
     image(dices[roll-1], 1142, 483, 141, 141)
     
     # draw main screen image
-    bg = loadImage(image_dir+"main_screen.png")
+    bg = loadImage(image_dir+"main_screen/bg.png")
     image(bg, 0, 0)
     
     # display turn
@@ -228,8 +228,8 @@ def main_screen():
     player_font = createFont("Arial Bold", 28, True)
     textFont(player_font)
     
-    player_image = loadImage(image_dir+"player_name_main.png")
-    player_image_selected = loadImage(image_dir+"player_name_main_selected.png")
+    player_image = loadImage(image_dir+"main_screen/player.png")
+    player_image_selected = loadImage(image_dir+"main_screen/player_selected.png")
 
     # starting cords for the player list
     ypos = 695
@@ -265,7 +265,7 @@ def main_screen():
     text(controller.get_current_player().get_armor(), 820, 270) 
     
     # next turn button
-    start_button = loadImage(image_dir+"next_turn.png")
+    start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
     buttons[5] = [1095, 695, 1334, 739]  # set cords for start button
     image(start_button, buttons[5][0], buttons[5][1])
     
