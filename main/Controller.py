@@ -81,20 +81,23 @@ class Controller:
         return self._radzone
     
     def update_radzone(self):
-        min_radzone = 0
+        if self._radzone < 13:
+            min_radzone = 0
 
-        player_count = len(self.get_players())
+            player_count = len(self.get_players())
 
-        if player_count == 2:
-            min_radzone = 8
-        elif player_count == 3:
-            min_radzone = 6
-        elif player_count == 4:
-            min_radzone = 4
-        elif player_count == 5:
-            min_radzone = 2
-        elif player_count == 6:
-            min_radzone = 1
+            if player_count == 2:
+                min_radzone = 8
+            elif player_count == 3:
+                min_radzone = 6
+            elif player_count == 4:
+                min_radzone = 4
+            elif player_count == 5:
+                min_radzone = 2
+            elif player_count == 6:
+                min_radzone = 1
 
-        if self._radzone < min_radzone:
-            self._radzone = min_radzone
+            if self._radzone < min_radzone:
+                self._radzone = min_radzone
+        else:
+            self._radzone = 13
