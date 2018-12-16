@@ -5,6 +5,8 @@ Class made by Jari
 """
 
 from Player import Player
+import Weapons
+import Items
 import random
 
 
@@ -15,6 +17,20 @@ class Controller:
     _current_player = 0  # stores player playing
     _move_radiation_zone = False  # stores move state of radiation zone
     _radzone = 0
+
+    # stores weapons
+    _weapons = [
+        Weapons.Shotgun(),
+        Weapons.AssaultRifle(),
+        Weapons.SniperRifle()
+    ]
+
+    # stores items
+    _item = [
+        Items.Armor(),
+        Items.BandAid(),
+        Items.FirstAidKit()
+    ]
 
     # stores colors
     _colors = [
