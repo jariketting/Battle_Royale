@@ -41,7 +41,7 @@ def setup():
     controller.add_player('Player 1')
     
     # setup dices
-    dices = [loadImage(image_dir+"dice_1.png"), loadImage(image_dir+"dice_2.png"), loadImage(image_dir+"dice_3.png")]
+    dices = [loadImage(image_dir+"dices/dice_1.png"), loadImage(image_dir+"dices/dice_2.png"), loadImage(image_dir+"dices/dice_3.png")]
     
     # start application with splash screen
     if state == 0:
