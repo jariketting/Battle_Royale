@@ -80,5 +80,21 @@ class Controller:
     def get_radzone(self):
         return self._radzone
     
-    def set_radzone(self, value):
-        self._radzone = value
+    def update_radzone(self):
+        min_radzone = 0
+
+        player_count = len(self.get_players())
+
+        if player_count == 2:
+            min_radzone = 8
+        elif player_count == 3:
+            min_radzone = 6
+        elif player_count == 4:
+            min_radzone = 4
+        elif player_count == 5:
+            min_radzone = 2
+        elif player_count == 6:
+            min_radzone = 1
+
+        if self._radzone < min_radzone:
+            self._radzone = min_radzone

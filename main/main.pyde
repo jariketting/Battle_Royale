@@ -183,6 +183,8 @@ def player_screen():
 def main_screen():
     global controller, dices, roll, timer
 
+    controller.update_radzone()
+
     player = controller.get_current_player()
     players = controller.get_players()
 
