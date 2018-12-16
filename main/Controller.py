@@ -79,3 +79,6 @@ class Controller:
         
     def get_radzone(self):
         return self._radzone
+    
+    def set_radzone(self, value):
+        self._radzone = value
