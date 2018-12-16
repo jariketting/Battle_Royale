@@ -310,7 +310,7 @@ def dice_roll():
 def draw_radzone():
     global controller
     
-    radsize = 16
+    radsize = 20
     boardsize = 26
     
     radzone = controller.get_radzone()
