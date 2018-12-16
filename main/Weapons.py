@@ -15,6 +15,8 @@ Get damage weapon does (number between zero and two for amount of tiles away)
 # Don't use this class in code
 class Weapon:
     _name = ''  # stores weapons name
+    _image = ''
+
     _damage_same_tile = 0  # stores damage when on same tile
     _damage_first_tile = 0  # stores damage when on first tile
     _damage_second_tile = 0  # stores damage when on second tile
@@ -22,6 +24,9 @@ class Weapon:
     # get name of weapon
     def get_name(self):
         return self._name
+
+    def get_image(self):
+        return self._image
 
     # get weapon damage done to player
     def get_damage(self, tile_count):
@@ -40,6 +45,8 @@ class Weapon:
 class Shotgun(Weapon):
     def __init__(self):
         self._name = 'Shotgun'
+        self._image = 'main_screen/cards/weapons/shotgun.png'
+
         self._damage_same_tile = 7
         self._damage_first_tile = 3
         self._damage_second_tile = 0
@@ -49,6 +56,8 @@ class Shotgun(Weapon):
 class AssaultRifle(Weapon):
     def __init__(self):
         self._name = 'Assault rifle'
+        self._image = 'main_screen/cards/weapons/assault_rifle.png'
+
         self._damage_same_tile = 3
         self._damage_first_tile = 5
         self._damage_second_tile = 3
@@ -58,6 +67,8 @@ class AssaultRifle(Weapon):
 class SniperRifle(Weapon):
     def __init__(self):
         self._name = 'Sniper rifle'
+        self._image = 'main_screen/cards/weapons/sniper_rifle.png'
+
         self._damage_same_tile = 1
         self._damage_first_tile = 4
         self._damage_second_tile = 7
