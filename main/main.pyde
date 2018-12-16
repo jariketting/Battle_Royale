@@ -7,7 +7,7 @@ import time
 import random
 from Controller import Controller
 
-state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
@@ -232,8 +232,8 @@ def main_screen():
     player_image_selected = loadImage(image_dir+"main_screen/player_selected.png")
 
     # starting cords for the player list
-    ypos = 695
     xpos = 22
+    ypos = 695
 
     # display each player on screen
     for player in reversed_players:
@@ -263,6 +263,42 @@ def main_screen():
     
     text(controller.get_current_player().get_hp(), 820, 185) 
     text(controller.get_current_player().get_armor(), 820, 270) 
+    
+    # display weapons and items
+    item_bg = loadImage(image_dir+"main_screen/item.png")
+    item_font = createFont("Arial Bold", 26, True)
+    textFont(item_font)
+    textAlign(CENTER)
+    
+    # weapons
+    xpos = 233
+    ypos = 421
+    
+    for weapon in controller.get_weapons():
+        image(item_bg, xpos, ypos)
+        text(weapon.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+        
+        ypos += 65
+        
+    # first items
+    xpos = 515
+    ypos = 421
+    
+    for item in controller.get_items():
+        image(item_bg, xpos, ypos)
+        text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+        
+        ypos += 65
+        
+    # second items
+    xpos = 795
+    ypos = 421
+    
+    for item in controller.get_items():
+        image(item_bg, xpos, ypos)
+        text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+        
+        ypos += 65
     
     # next turn button
     start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
