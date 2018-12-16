@@ -17,7 +17,7 @@ class Controller:
     _radzone = 0
 
     # stores colors
-    _color = [
+    _colors = [
         [141, 0, 0],  # red
         [51, 193, 0],  # green
         [0, 140, 183],  # blue
@@ -72,7 +72,7 @@ class Controller:
         self._players.append(Player())
 
         self._players[-1].set_name(name)
-        self._players[-1].set_color(*self._color[len(self.get_players()) - 1])
+        self._players[-1].set_color(*self._colors[len(self.get_players()) - 1])
         
     def remove_player(self, number):
         del self._players[number]
