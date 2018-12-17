@@ -41,7 +41,12 @@ item_buttons = [
 ]
 
 card_buttons = [
-
+    [0, 0, 0, 0],  # weapon
+    [0, 0, 0, 0],  # del weapon
+    [0, 0, 0, 0],  # first item
+    [0, 0, 0, 0],  # del first item
+    [0, 0, 0, 0],  # second item
+    [0, 0, 0, 0]  # del second item
 ]
 
 dices = []
@@ -107,7 +112,7 @@ def mouseReleased():
     # get required global vars
     global buttons, state, controller, timer, item_buttons
     
-    boxes = buttons + item_buttons + card_buttons
+    boxes = buttons + card_buttons + item_buttons
     
     # go trough each button and check if it is pressed
     for button, cords in enumerate(boxes):
@@ -127,7 +132,7 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
-                item_start = 6
+                item_start = 12
                 
                 if button == 3:
                     timer = 50
@@ -135,32 +140,32 @@ def mouseReleased():
                 elif button == 5:
                     controller.next_turn()
                     print('next turn')
-                elif button == item_start:
+                if button == item_start and not controller.get_current_player().get_weapon():
                     controller.get_current_player().set_weapon(Weapons.Shotgun())
                     print('shotgun')
-                elif button == item_start + 1:
+                elif button == item_start + 1 and not controller.get_current_player().get_weapon():
                     controller.get_current_player().set_weapon(Weapons.AssaultRifle())
                     print('assault rifle')
-                elif button == item_start + 2:
+                elif button == item_start + 2 and not controller.get_current_player().get_weapon():
                     controller.get_current_player().set_weapon(Weapons.SniperRifle())
                     print('sniper rifle')
-                elif button == item_start + 3:
-                    controller.get_current_player().set_weapon(Items.Armor())
+                elif button == item_start + 3 and not controller.get_current_player().get_first_item():
+                    controller.get_current_player().set_first_item(Items.Armor())
                     print('armor 1')
-                elif button == item_start + 4:
-                    controller.get_current_player().set_weapon(Items.BandAid())
+                elif button == item_start + 4 and not controller.get_current_player().get_first_item():
+                    controller.get_current_player().set_first_item(Items.BandAid())
                     print('band aid 1')
-                elif button == item_start + 5:
-                    controller.get_current_player().set_weapon(Items.FirstAidKit())
+                elif button == item_start + 5 and not controller.get_current_player().get_first_item():
+                    controller.get_current_player().set_first_item(Items.FirstAidKit())
                     print('med kit 1')
-                elif button == item_start + 6:
-                    controller.get_current_player().set_weapon(Items.Armor())
+                elif button == item_start + 6 and not controller.get_current_player().get_second_item():
+                    controller.get_current_player().set_second_item(Items.Armor())
                     print('armor 2')
-                elif button == item_start + 7:
-                    controller.get_current_player().set_weapon(Items.BandAid())
+                elif button == item_start + 7  and not controller.get_current_player().get_second_item():
+                    controller.get_current_player().set_second_item(Items.BandAid())
                     print('band aid 2')
-                elif button == item_start + 8:
-                    controller.get_current_player().set_weapon(Items.FirstAidKit())
+                elif button == item_start + 8  and not controller.get_current_player().get_second_item():
+                    controller.get_current_player().set_second_item(Items.FirstAidKit())
                     print('med kit 2')
 
  
@@ -322,46 +327,65 @@ def main_screen():
     textFont(item_font)
     textAlign(CENTER)
     
-    # weapons
-    xpos = 233
-    ypos = 421
-    
     cur_item = 0
     
-    for weapon in controller.get_weapons():
-        image(item_bg, xpos, ypos)
-        text(weapon.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+    # weapon
+    if controller.get_current_player().get_weapon():
+        weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
+        image(weapon_image, 233, 403, 232, 324)
         
-        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        cur_item += 3
+    else:
         
-        ypos += 65
-        cur_item += 1
+        xpos = 233
+        ypos = 421
         
-    # first items
-    xpos = 515
-    ypos = 421
+        for weapon in controller.get_weapons():
+            image(item_bg, xpos, ypos)
+            text(weapon.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+            
+            item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+            
+            ypos += 65
+            cur_item += 1
     
-    for item in controller.get_items():
-        image(item_bg, xpos, ypos)
-        text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+    # first item
+    if controller.get_current_player().get_first_item():
+        item_image = loadImage(image_dir+controller.get_current_player().get_first_item().get_image())
+        image(item_image, 515, 403, 232, 324)
         
-        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        cur_item += 3
+    else:
+        xpos = 515
+        ypos = 421
         
-        ypos += 65
-        cur_item += 1
+        for item in controller.get_items():
+            image(item_bg, xpos, ypos)
+            text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+            
+            item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+            
+            ypos += 65
+            cur_item += 1
         
-    # second items
-    xpos = 795
-    ypos = 421
-    
-    for item in controller.get_items():
-        image(item_bg, xpos, ypos)
-        text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+    # second item
+    if controller.get_current_player().get_second_item():
+        item_image = loadImage(image_dir+controller.get_current_player().get_second_item().get_image())
+        image(item_image, 795, 403, 232, 324)
         
-        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        cur_item += 3
+    else:
+        xpos = 795
+        ypos = 421
         
-        ypos += 65
-        cur_item += 1
+        for item in controller.get_items():
+            image(item_bg, xpos, ypos)
+            text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
+            
+            item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+            
+            ypos += 65
+            cur_item += 1
     
     # next turn button
     start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
