@@ -17,6 +17,12 @@ class Controller:
     _current_player = 0  # stores player playing
     _move_radiation_zone = False  # stores move state of radiation zone
     _radzone = 0
+    
+    _player_attack = [
+        False,  # stores if player is attacking
+        0,  # stores if player being attacked
+        0   # stores amount of tile away
+    ]
 
     # stores weapons
     _weapons = [
@@ -53,6 +59,8 @@ class Controller:
         return self._round
 
     def next_turn(self):
+        self._reset_player_attack()
+        
         if self._current_player < len(self.get_players()) - 1:
             self._current_player += 1
         else:
@@ -98,6 +106,9 @@ class Controller:
 
     def get_items(self):
         return self._items
+
+    def _reset_player_attack(self):
+        self._player_attack = [False, 0, 0]
 
     def get_radzone(self):
         return self._radzone
