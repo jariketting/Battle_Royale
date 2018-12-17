@@ -24,7 +24,8 @@ buttons = [
     [0, 0, 0, 0],  # remove player button
     [0, 0, 0, 0],  # dice
     [0, 0, 0, 0],  # round tracker hover
-    [0, 0, 0, 0]  # next turn
+    [0, 0, 0, 0],  # next turn
+    [0, 0, 0, 0]  # close attack button
 ]
 
 #stores item buttons
@@ -133,8 +134,8 @@ def mouseReleased():
                         controller.remove_player(-1)
             elif state == 2:
                 if not controller.is_attacking():
-                    card_start = 6
-                    item_start = 12
+                    card_start = 7
+                    item_start = 13
                     
                     if button == 3:
                         timer = 50
@@ -196,7 +197,9 @@ def mouseReleased():
                         controller.get_current_player().set_second_item(Items.FirstAidKit())
                         print('med kit 2')
                 else:
-                    return
+                    if button == 6:
+                        controller.reset_player_attack()
+                        print('stop attack')
 
  
 """
@@ -450,7 +453,8 @@ def main_screen():
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
         image(weapon_image, 273, 60, 232, 324)
         
-        image(delete_image, 1064, 50, 40, 40)
+        buttons[6] = [1064, 50, 1064 + 40, 50 + 40]
+        image(delete_image, buttons[6][0], buttons[6][1], 40, 40)
         
     
     # next turn button

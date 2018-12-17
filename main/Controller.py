@@ -59,7 +59,7 @@ class Controller:
         return self._round
 
     def next_turn(self):
-        self._reset_player_attack()
+        self.reset_player_attack()
         
         if self._current_player < len(self.get_players()) - 1:
             self._current_player += 1
@@ -106,7 +106,7 @@ class Controller:
     def get_items(self):
         return self._items
 
-    def _reset_player_attack(self):
+    def reset_player_attack(self):
         self._player_attack = [False, None, 0]
 
     def is_attacking(self):
