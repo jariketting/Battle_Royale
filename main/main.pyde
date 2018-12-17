@@ -294,7 +294,7 @@ def main_screen():
     fill(0)
     textAlign(CENTER)
     
-    text(controller.get_round(), 1210, 215) 
+    text(controller.get_round(), 1210, 215)
     
     # display current player
     fill(*player.get_color())  # fill with players color
@@ -353,7 +353,7 @@ def main_screen():
     
     # display weapons and items
     item_bg = loadImage(image_dir+"main_screen/item.png")
-    delete_image = loadImage(image_dir+"main_screen/delete_card_button.png")
+    delete_image = loadImage(image_dir+"main_screen/delete_button.png")
     item_font = createFont("Arial Bold", 26, True)
     textFont(item_font)
     textAlign(CENTER)
@@ -438,6 +438,12 @@ def main_screen():
             
             ypos += 65
             cur_item += 1
+    
+    # player attack event
+    if controller.is_attacking():
+        stroke(0)
+        fill(255)
+        rect(100, 100, 100, 100)
     
     # next turn button
     start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
