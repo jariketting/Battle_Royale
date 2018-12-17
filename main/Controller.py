@@ -21,7 +21,6 @@ class Controller:
     _player_attack = [
         False,  # stores if player is attacking
         None,  # stores if player being attacked
-        0   # stores amount of tile away
     ]
 
     # stores weapons
@@ -107,13 +106,16 @@ class Controller:
         return self._items
 
     def reset_player_attack(self):
-        self._player_attack = [False, None, 0]
+        self._player_attack = [False, None]
 
     def is_attacking(self):
         return self._player_attack[0]
     
     def get_player_attacking(self):
         return self._player_attack[1]
+    
+    def attack_player(self, tiles):
+        self.get_player_attacking().do_damage(self.get_current_player().get_weapon().get_damage(tiles))
     
     def set_player_attacking(self, player):
         self._player_attack[1] = player

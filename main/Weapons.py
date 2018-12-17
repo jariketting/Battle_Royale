@@ -48,8 +48,8 @@ class Shotgun(Weapon):
         self._image = 'main_screen/cards/weapons/shotgun.png'
 
         self._damage_same_tile = 7
-        self._damage_first_tile = 3
-        self._damage_second_tile = 0
+        self._damage_first_tile = 5
+        self._damage_second_tile = 3
 
 
 # setup Assault rifle

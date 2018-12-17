@@ -25,7 +25,10 @@ buttons = [
     [0, 0, 0, 0],  # dice
     [0, 0, 0, 0],  # round tracker hover
     [0, 0, 0, 0],  # next turn
-    [0, 0, 0, 0]  # close attack button
+    [0, 0, 0, 0],  # close attack button
+    [0, 0, 0, 0],  # 0 tiles button
+    [0, 0, 0, 0],  # 1 tile button
+    [0, 0, 0, 0]  # 2 tiles button
 ]
 
 #stores item buttons
@@ -130,6 +133,8 @@ def mouseReleased():
     for button, cords in enumerate(boxes):
         # check if players clicked location falls withing the buttons cords
         if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
+            print('Button: '+ str(button))
+            
             # some buttons can only be pressed in specific stages of the application, check what state the game is in
             if state == 1:
                 if button == 0:
@@ -145,8 +150,8 @@ def mouseReleased():
                         controller.remove_player(-1)
             elif state == 2:
                 if not controller.is_attacking():
-                    card_start = 7
-                    item_start = 13
+                    card_start = 10
+                    item_start = 16
                     
                     if button == 3:
                         timer = 50
@@ -207,16 +212,31 @@ def mouseReleased():
                     elif button == item_start + 8  and not controller.get_current_player().get_second_item():
                         controller.get_current_player().set_second_item(Items.FirstAidKit())
                         print('med kit 2')
-                else:
-                    player_start = 22
+                elif not controller.get_player_attacking():
+                    player_start = 25
                     
                     if button == 6:
                         controller.reset_player_attack()
-                        print('stop attack')
+                        print('attacking stopped')
                     elif button >= player_start:
                         controller.set_player_attacking(cords[4])
                         print(cords[4].get_name() + ' being attacked')
-                        
+                elif controller.get_player_attacking():
+                    if button == 6:
+                        controller.reset_player_attack()
+                        print('attacking stopped')
+                    elif button == 7:
+                        controller.attack_player(0)
+                        controller.reset_player_attack()
+                        print('0 tiles clicked')
+                    elif button == 8:
+                        controller.attack_player(1)
+                        controller.reset_player_attack()
+                        print('1 tile clicked')
+                    elif button == 9:
+                        controller.attack_player(2)
+                        controller.reset_player_attack()
+                        print('2 tiles clicked')
 
  
 """
@@ -464,7 +484,7 @@ def main_screen():
         # draw background
         stroke(0)
         fill(255)
-        rect(263, 50, 841, 643)
+        rect(263, 150, 841, 500)
         
         font = createFont("Arial Bold", 26, True)
         textFont(font)
@@ -473,25 +493,38 @@ def main_screen():
         
         # draw users weapon
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
-        image(weapon_image, 273, 60, 232, 324)
+        image(weapon_image, 273, 160, 232, 324)
         
-        buttons[6] = [1064, 50, 1064 + 40, 50 + 40]
+        buttons[6] = [1064, 150, 1064 + 40, 150 + 40]
         image(delete_image, buttons[6][0], buttons[6][1], 40, 40)
         
         noStroke()
+        ypos = 220
+        xpos = 515
         
         if controller.get_player_attacking():
-            text('How many tiles is the player away?', 515, 90)
+            text('How many tiles is the player away?', 515, 190)
+            
+            for n in range(3):
+                fill(19) # set color of rect displayed
+                    
+                rect(xpos, ypos, 45, 45)
+                
+                buttons[6 + (n + 1)] = [xpos, ypos, xpos + 45, ypos + 45]
+            
+                fill(255)  # set color of name displayed
+                    
+                text(n, xpos + 15, ypos + 33)  # display players name
+                
+                ypos += 51  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
+            
         else:
-            text('Choose player to attack', 515, 90)
+            text('Choose player to attack', 515, 190)
             textFont(player_font)
             
             # display each player on screen
             player_start = 0
-            
-            xpos = 515
-            ypos = 120
-            
+
             for player in controller.get_players():
                 if player != controller.get_current_player() and not player.is_dead():
                     fill(19) # set color of rect displayed
