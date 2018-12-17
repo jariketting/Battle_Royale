@@ -59,7 +59,7 @@ def setup():
     
     size(1366, 768)  # set size of application according to designs specs
     background(19)  # set background color of application
-    frameRate(60)  # set framerate
+    frameRate(30)  # set framerate
     
     # add one player on default
     controller.add_player('Player 1')
@@ -343,17 +343,18 @@ def main_screen():
     # weapon
     if controller.get_current_player().get_weapon():
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
-        image(weapon_image, 233, 403, 232, 324)
+        
+        card_buttons[0] = [233, 403, 232, 324]
+        image(weapon_image, card_buttons[0][0], card_buttons[0][1], card_buttons[0][2], card_buttons[0][3])
         
         card_buttons[1] = [425, 403, 425 + 40, 403 + 40]
-        image(delete_image, 425, 403, 40, 40)
+        image(delete_image, card_buttons[1][0], card_buttons[1][1], 40, 40)
         
         for weapon in controller.get_weapons():
             item_buttons[cur_item] = [0, 0, 0, 0]   # change button
             cur_item += 1
         
     else:
-        
         xpos = 233
         ypos = 421
         
@@ -369,7 +370,9 @@ def main_screen():
     # first item
     if controller.get_current_player().get_first_item():
         item_image = loadImage(image_dir+controller.get_current_player().get_first_item().get_image())
-        image(item_image, 515, 403, 232, 324)
+        
+        card_buttons[2] = [515, 403, 232, 324]
+        image(weapon_image, card_buttons[0][0], card_buttons[0][1], card_buttons[0][2], card_buttons[0][3])
         
         card_buttons[3] = [707, 403, 707 + 40, 403 + 40]
         image(delete_image, 707, 403, 40, 40)
@@ -393,7 +396,9 @@ def main_screen():
     # second item
     if controller.get_current_player().get_second_item():
         item_image = loadImage(image_dir+controller.get_current_player().get_second_item().get_image())
-        image(item_image, 795, 403, 232, 324)
+        
+        card_buttons[4] = [795, 403, 232, 324]
+        image(weapon_image, card_buttons[0][0], card_buttons[0][1], card_buttons[0][2], card_buttons[0][3])
         
         card_buttons[5] = [987, 403, 987 + 40, 403 + 40]
         image(delete_image, 987, 403, 40, 40)
