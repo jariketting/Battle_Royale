@@ -132,67 +132,71 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
-                card_start = 6
-                item_start = 12
-                
-                if button == 3:
-                    timer = 50
-                    print('dice')
-                elif button == 5:
-                    controller.next_turn()
-                    print('next turn')
+                if not controller.is_attacking():
+                    card_start = 6
+                    item_start = 12
                     
-                elif button == card_start + 1 and controller.get_current_player().get_weapon():
-                    print('click weapon')
-                elif button == card_start and controller.get_current_player().get_weapon():
-                    controller.get_current_player().set_weapon(None)
-                    print('del weapon')
-                    
-                elif button == card_start + 3 and controller.get_current_player().get_first_item():
-                    controller.get_current_player().get_first_item().use(controller.get_current_player())
-                    controller.get_current_player().set_first_item(None)
-                    print('click first item')
-                elif button == card_start + 2 and controller.get_current_player().get_first_item():
-                    controller.get_current_player().set_first_item(None)
-                    print('del first item')
-                    
-                elif button == card_start + 5 and controller.get_current_player().get_second_item():
-                    controller.get_current_player().get_second_item().use(controller.get_current_player())
-                    controller.get_current_player().set_second_item(None)
-                    print('click second item')
-                elif button == card_start + 4 and controller.get_current_player().get_second_item():
-                    controller.get_current_player().set_second_item(None)
-                    print('del second item')
-                    
-                elif button == item_start and not controller.get_current_player().get_weapon():
-                    controller.get_current_player().set_weapon(Weapons.Shotgun())
-                    print('shotgun')
-                elif button == item_start + 1 and not controller.get_current_player().get_weapon():
-                    controller.get_current_player().set_weapon(Weapons.AssaultRifle())
-                    print('assault rifle')
-                elif button == item_start + 2 and not controller.get_current_player().get_weapon():
-                    controller.get_current_player().set_weapon(Weapons.SniperRifle())
-                    print('sniper rifle')
-                    
-                elif button == item_start + 3 and not controller.get_current_player().get_first_item():
-                    controller.get_current_player().set_first_item(Items.Armor())
-                    print('armor 1')
-                elif button == item_start + 4 and not controller.get_current_player().get_first_item():
-                    controller.get_current_player().set_first_item(Items.BandAid())
-                    print('band aid 1')
-                elif button == item_start + 5 and not controller.get_current_player().get_first_item():
-                    controller.get_current_player().set_first_item(Items.FirstAidKit())
-                    print('med kit 1')
-                    
-                elif button == item_start + 6 and not controller.get_current_player().get_second_item():
-                    controller.get_current_player().set_second_item(Items.Armor())
-                    print('armor 2')
-                elif button == item_start + 7  and not controller.get_current_player().get_second_item():
-                    controller.get_current_player().set_second_item(Items.BandAid())
-                    print('band aid 2')
-                elif button == item_start + 8  and not controller.get_current_player().get_second_item():
-                    controller.get_current_player().set_second_item(Items.FirstAidKit())
-                    print('med kit 2')
+                    if button == 3:
+                        timer = 50
+                        print('dice')
+                    elif button == 5:
+                        controller.next_turn()
+                        print('next turn')
+                        
+                    elif button == card_start + 1 and controller.get_current_player().get_weapon():
+                        controller.start_attack()
+                        print('click weapon')
+                    elif button == card_start and controller.get_current_player().get_weapon():
+                        controller.get_current_player().set_weapon(None)
+                        print('del weapon')
+                        
+                    elif button == card_start + 3 and controller.get_current_player().get_first_item():
+                        controller.get_current_player().get_first_item().use(controller.get_current_player())
+                        controller.get_current_player().set_first_item(None)
+                        print('click first item')
+                    elif button == card_start + 2 and controller.get_current_player().get_first_item():
+                        controller.get_current_player().set_first_item(None)
+                        print('del first item')
+                        
+                    elif button == card_start + 5 and controller.get_current_player().get_second_item():
+                        controller.get_current_player().get_second_item().use(controller.get_current_player())
+                        controller.get_current_player().set_second_item(None)
+                        print('click second item')
+                    elif button == card_start + 4 and controller.get_current_player().get_second_item():
+                        controller.get_current_player().set_second_item(None)
+                        print('del second item')
+                        
+                    elif button == item_start and not controller.get_current_player().get_weapon():
+                        controller.get_current_player().set_weapon(Weapons.Shotgun())
+                        print('shotgun')
+                    elif button == item_start + 1 and not controller.get_current_player().get_weapon():
+                        controller.get_current_player().set_weapon(Weapons.AssaultRifle())
+                        print('assault rifle')
+                    elif button == item_start + 2 and not controller.get_current_player().get_weapon():
+                        controller.get_current_player().set_weapon(Weapons.SniperRifle())
+                        print('sniper rifle')
+                        
+                    elif button == item_start + 3 and not controller.get_current_player().get_first_item():
+                        controller.get_current_player().set_first_item(Items.Armor())
+                        print('armor 1')
+                    elif button == item_start + 4 and not controller.get_current_player().get_first_item():
+                        controller.get_current_player().set_first_item(Items.BandAid())
+                        print('band aid 1')
+                    elif button == item_start + 5 and not controller.get_current_player().get_first_item():
+                        controller.get_current_player().set_first_item(Items.FirstAidKit())
+                        print('med kit 1')
+                        
+                    elif button == item_start + 6 and not controller.get_current_player().get_second_item():
+                        controller.get_current_player().set_second_item(Items.Armor())
+                        print('armor 2')
+                    elif button == item_start + 7  and not controller.get_current_player().get_second_item():
+                        controller.get_current_player().set_second_item(Items.BandAid())
+                        print('band aid 2')
+                    elif button == item_start + 8  and not controller.get_current_player().get_second_item():
+                        controller.get_current_player().set_second_item(Items.FirstAidKit())
+                        print('med kit 2')
+                else:
+                    return
 
  
 """

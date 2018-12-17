@@ -110,6 +110,12 @@ class Controller:
     def _reset_player_attack(self):
         self._player_attack = [False, 0, 0]
 
+    def is_attacking(self):
+        return self._player_attack[0]
+
+    def start_attack(self):
+        self._player_attack[0] = True
+
     def get_radzone(self):
         return self._radzone
     
