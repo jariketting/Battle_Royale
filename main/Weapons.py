@@ -69,6 +69,6 @@ class SniperRifle(Weapon):
         self._name = 'Sniper rifle'
         self._image = 'main_screen/cards/weapons/sniper_rifle.png'
 
-        self._damage_same_tile = 1
-        self._damage_first_tile = 4
+        self._damage_same_tile = 3
+        self._damage_first_tile = 5
         self._damage_second_tile = 7

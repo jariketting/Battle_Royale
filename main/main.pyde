@@ -308,7 +308,7 @@ def player_screen():
 
 
 def main_screen():
-    global controller, dices, roll, timer, card_buttons, item_buttons
+    global controller, dices, roll, timer, card_buttons, item_buttons, state
 
     controller.update_radzone()
 
@@ -565,6 +565,9 @@ def main_screen():
     
     if mouseX >= buttons[4][0] and mouseX <= buttons[4][2] and mouseY >= buttons[4][1] and mouseY <= buttons[4][3]:
         draw_radzone()
+        
+    if controller.has_winner():
+        state = 3
     
 
 def credit_screen():

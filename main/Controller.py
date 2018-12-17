@@ -147,3 +147,22 @@ class Controller:
                 self._radzone = min_radzone
         else:
             self._radzone = 13
+            
+    def has_winner(self):
+        player_count = 0
+        
+        for player in self.get_players():
+            if player.is_alive():
+                player_count += 1
+                
+        if player_count == 1:
+            return True
+                
+        return False
+    
+    def get_winner(self):
+        for player in self.get_players():
+            if player.is_alive():
+                return player
+                
+        return None
