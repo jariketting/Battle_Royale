@@ -132,6 +132,7 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
+                card_start = 6
                 item_start = 12
                 
                 if button == 3:
@@ -140,7 +141,16 @@ def mouseReleased():
                 elif button == 5:
                     controller.next_turn()
                     print('next turn')
-                if button == item_start and not controller.get_current_player().get_weapon():
+                elif button == card_start + 1 and controller.get_current_player().get_weapon():
+                    controller.get_current_player().set_weapon(None)
+                    print('del weapon')
+                elif button == card_start + 3 and controller.get_current_player().get_first_item():
+                    controller.get_current_player().set_first_item(None)
+                    print('del first item')
+                elif button == card_start + 5 and controller.get_current_player().get_second_item():
+                    controller.get_current_player().set_second_item(None)
+                    print('del second item')
+                elif button == item_start and not controller.get_current_player().get_weapon():
                     controller.get_current_player().set_weapon(Weapons.Shotgun())
                     print('shotgun')
                 elif button == item_start + 1 and not controller.get_current_player().get_weapon():
@@ -238,7 +248,7 @@ def player_screen():
 
 
 def main_screen():
-    global controller, dices, roll, timer
+    global controller, dices, roll, timer, card_buttons, item_buttons
 
     controller.update_radzone()
 
@@ -335,9 +345,13 @@ def main_screen():
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
         image(weapon_image, 233, 403, 232, 324)
         
+        card_buttons[1] = [425, 403, 425 + 40, 403 + 40]
         image(delete_image, 425, 403, 40, 40)
         
-        cur_item += 3
+        for weapon in controller.get_weapons():
+            item_buttons[cur_item] = [0, 0, 0, 0]   # change button
+            cur_item += 1
+        
     else:
         
         xpos = 233
@@ -357,7 +371,12 @@ def main_screen():
         item_image = loadImage(image_dir+controller.get_current_player().get_first_item().get_image())
         image(item_image, 515, 403, 232, 324)
         
-        cur_item += 3
+        card_buttons[3] = [707, 403, 707 + 40, 403 + 40]
+        image(delete_image, 707, 403, 40, 40)
+        
+        for item in controller.get_items():
+            item_buttons[cur_item] = [0, 0, 0, 0]   # change button
+            cur_item += 1
     else:
         xpos = 515
         ypos = 421
@@ -376,7 +395,12 @@ def main_screen():
         item_image = loadImage(image_dir+controller.get_current_player().get_second_item().get_image())
         image(item_image, 795, 403, 232, 324)
         
-        cur_item += 3
+        card_buttons[5] = [987, 403, 987 + 40, 403 + 40]
+        image(delete_image, 987, 403, 40, 40)
+        
+        for item in controller.get_items():
+            item_buttons[cur_item] = [0, 0, 0, 0]   # change button
+            cur_item += 1
     else:
         xpos = 795
         ypos = 421
