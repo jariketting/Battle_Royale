@@ -441,9 +441,17 @@ def main_screen():
     
     # player attack event
     if controller.is_attacking():
+        # draw background
         stroke(0)
         fill(255)
-        rect(100, 100, 100, 100)
+        rect(263, 50, 841, 643)
+        
+        # draw users weapon
+        weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
+        image(weapon_image, 273, 60, 232, 324)
+        
+        image(delete_image, 1064, 50, 40, 40)
+        
     
     # next turn button
     start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
