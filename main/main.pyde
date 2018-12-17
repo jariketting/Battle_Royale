@@ -323,6 +323,7 @@ def main_screen():
     
     # display weapons and items
     item_bg = loadImage(image_dir+"main_screen/item.png")
+    delete_image = loadImage(image_dir+"main_screen/delete_card_button.png")
     item_font = createFont("Arial Bold", 26, True)
     textFont(item_font)
     textAlign(CENTER)
@@ -333,6 +334,8 @@ def main_screen():
     if controller.get_current_player().get_weapon():
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
         image(weapon_image, 233, 403, 232, 324)
+        
+        image(delete_image, 425, 403, 40, 40)
         
         cur_item += 3
     else:
