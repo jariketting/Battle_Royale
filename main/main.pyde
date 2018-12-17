@@ -9,7 +9,7 @@ import Weapons
 import Items
 from Controller import Controller
 
-state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
+state = 0  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
 image_dir = "images/"  # directory images are stored in
 controller = Controller()
 
@@ -85,6 +85,8 @@ def setup():
     # start application with splash screen
     if state == 0:
         splash_screen()
+    elif state == 3:
+        win_screen()
     
 
 """
@@ -103,7 +105,6 @@ def draw():
     # check what state the game is in
     if state == 0:
         # splash screen has to be displayer for 3 seconds, then the next screen will be shown by chaching the state
-        
         time.sleep(3)  # wait 3 seconds
         state = 1  # change state of game to 1
     elif state == 1:
@@ -113,7 +114,8 @@ def draw():
         # main screen
         main_screen()
     elif state == 3:
-        return
+        time.sleep(10)  # wait 10 seconds
+        state = 4  # change state of game to 4
     elif state == 4:
         credit_screen()
     
@@ -567,8 +569,23 @@ def main_screen():
         draw_radzone()
         
     if controller.has_winner():
+        win_screen()
         state = 3
+
+def win_screen():
+    global controller
     
+    background(*controller.get_winner().get_color())
+    font = createFont("Arial Bold", 100, True)
+    textFont(font)
+    fill(255)
+    textAlign(CENTER)
+    
+    text('Winner!', 683, 300)
+    
+    textSize(62)
+    
+    text(controller.get_winner().get_name() + ' has won the game', 683, 450)
 
 def credit_screen():
     global y_offset
