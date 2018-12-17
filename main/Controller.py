@@ -20,7 +20,7 @@ class Controller:
     
     _player_attack = [
         False,  # stores if player is attacking
-        0,  # stores if player being attacked
+        None,  # stores if player being attacked
         0   # stores amount of tile away
     ]
 
@@ -82,7 +82,6 @@ class Controller:
         else:
             self._move_radiation_zone = False
     
-    
     def get_radiation_zone(self):
         return self._move_radiation_zone
 
@@ -108,7 +107,7 @@ class Controller:
         return self._items
 
     def _reset_player_attack(self):
-        self._player_attack = [False, 0, 0]
+        self._player_attack = [False, None, 0]
 
     def is_attacking(self):
         return self._player_attack[0]
