@@ -5,6 +5,8 @@ Main file of the application.
 # imports
 import time
 import random
+import Weapons
+import Items
 from Controller import Controller
 
 state = 1  # stores state of the game (0 = splash screen, 1 = player screen, 2 =?...)
@@ -23,6 +25,23 @@ buttons = [
     [0, 0, 0, 0],  # dice
     [0, 0, 0, 0],  # round tracker hover
     [0, 0, 0, 0]  # next turn
+]
+
+#stores item buttons
+item_buttons = [
+    [0, 0, 0, 0],  # shotgun
+    [0, 0, 0, 0],  # assault rifle
+    [0, 0, 0, 0],  # sniper rifle
+    [0, 0, 0, 0],  # armor 1
+    [0, 0, 0, 0],  # band aid 1
+    [0, 0, 0, 0],  # med kit 1
+    [0, 0, 0, 0],  # armor 2
+    [0, 0, 0, 0],  # band aid 2
+    [0, 0, 0, 0]  # med kit 2
+]
+
+card_buttons = [
+
 ]
 
 dices = []
@@ -86,10 +105,12 @@ Buttons are stored in the buttons var. And are pointed to by it's index key
 """
 def mouseReleased():
     # get required global vars
-    global buttons, state, controller, timer
+    global buttons, state, controller, timer, item_buttons
+    
+    boxes = buttons + item_buttons + card_buttons
     
     # go trough each button and check if it is pressed
-    for button, cords in enumerate(buttons):
+    for button, cords in enumerate(boxes):
         # check if players clicked location falls withing the buttons cords
         if mouseX >= cords[0] and mouseX <= cords[2] and mouseY >= cords[1] and mouseY <= cords[3]:
             # some buttons can only be pressed in specific stages of the application, check what state the game is in
@@ -106,10 +127,41 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
+                item_start = 6
+                
                 if button == 3:
                     timer = 50
+                    print('dice')
                 elif button == 5:
                     controller.next_turn()
+                    print('next turn')
+                elif button == item_start:
+                    controller.get_current_player().set_weapon(Weapons.Shotgun())
+                    print('shotgun')
+                elif button == item_start + 1:
+                    controller.get_current_player().set_weapon(Weapons.AssaultRifle())
+                    print('assault rifle')
+                elif button == item_start + 2:
+                    controller.get_current_player().set_weapon(Weapons.SniperRifle())
+                    print('sniper rifle')
+                elif button == item_start + 3:
+                    controller.get_current_player().set_weapon(Items.Armor())
+                    print('armor 1')
+                elif button == item_start + 4:
+                    controller.get_current_player().set_weapon(Items.BandAid())
+                    print('band aid 1')
+                elif button == item_start + 5:
+                    controller.get_current_player().set_weapon(Items.FirstAidKit())
+                    print('med kit 1')
+                elif button == item_start + 6:
+                    controller.get_current_player().set_weapon(Items.Armor())
+                    print('armor 2')
+                elif button == item_start + 7:
+                    controller.get_current_player().set_weapon(Items.BandAid())
+                    print('band aid 2')
+                elif button == item_start + 8:
+                    controller.get_current_player().set_weapon(Items.FirstAidKit())
+                    print('med kit 2')
 
  
 """
@@ -274,11 +326,16 @@ def main_screen():
     xpos = 233
     ypos = 421
     
+    cur_item = 0
+    
     for weapon in controller.get_weapons():
         image(item_bg, xpos, ypos)
         text(weapon.get_name().upper(), xpos + 116, ypos + 33)  # display players name
         
+        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        
         ypos += 65
+        cur_item += 1
         
     # first items
     xpos = 515
@@ -288,7 +345,10 @@ def main_screen():
         image(item_bg, xpos, ypos)
         text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
         
+        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        
         ypos += 65
+        cur_item += 1
         
     # second items
     xpos = 795
@@ -298,7 +358,10 @@ def main_screen():
         image(item_bg, xpos, ypos)
         text(item.get_name().upper(), xpos + 116, ypos + 33)  # display players name
         
+        item_buttons[cur_item] = [xpos, ypos, xpos + 232, ypos + 50]   # add button
+        
         ypos += 65
+        cur_item += 1
     
     # next turn button
     start_button = loadImage(image_dir+"main_screen/next_turn_button.png")
