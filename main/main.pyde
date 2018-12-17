@@ -50,6 +50,17 @@ card_buttons = [
     [0, 0, 0, 0]  # second item
 ]
 
+player_buttons = [
+    [0, 0, 0, 0, None],  # player 1
+    [0, 0, 0, 0, None],  # player 2
+    [0, 0, 0, 0, None],  # player 3
+    [0, 0, 0, 0, None],  # player 4
+    [0, 0, 0, 0, None],  # player 5
+    [0, 0, 0, 0, None],  # player 6
+    [0, 0, 0, 0, None],  # player 7
+    [0, 0, 0, 0, None]  # player 8
+]
+
 dices = []
 
 """
@@ -113,7 +124,7 @@ def mouseReleased():
     # get required global vars
     global buttons, state, controller, timer, item_buttons
     
-    boxes = buttons + card_buttons + item_buttons
+    boxes = buttons + card_buttons + item_buttons + player_buttons
     
     # go trough each button and check if it is pressed
     for button, cords in enumerate(boxes):
@@ -197,9 +208,15 @@ def mouseReleased():
                         controller.get_current_player().set_second_item(Items.FirstAidKit())
                         print('med kit 2')
                 else:
+                    player_start = 22
+                    
                     if button == 6:
                         controller.reset_player_attack()
                         print('stop attack')
+                    elif button >= player_start:
+                        controller.set_player_attacking(cords[4])
+                        print(cords[4].get_name() + ' being attacked')
+                        
 
  
 """
@@ -449,12 +466,49 @@ def main_screen():
         fill(255)
         rect(263, 50, 841, 643)
         
+        font = createFont("Arial Bold", 26, True)
+        textFont(font)
+        fill(0)
+        textAlign(LEFT)
+        
         # draw users weapon
         weapon_image = loadImage(image_dir+controller.get_current_player().get_weapon().get_image())
         image(weapon_image, 273, 60, 232, 324)
         
         buttons[6] = [1064, 50, 1064 + 40, 50 + 40]
         image(delete_image, buttons[6][0], buttons[6][1], 40, 40)
+        
+        noStroke()
+        
+        if controller.get_player_attacking():
+            text('How many tiles is the player away?', 515, 90)
+        else:
+            text('Choose player to attack', 515, 90)
+            textFont(player_font)
+            
+            # display each player on screen
+            player_start = 0
+            
+            xpos = 515
+            ypos = 120
+            
+            for player in controller.get_players():
+                if player != controller.get_current_player() and not player.is_dead():
+                    fill(19) # set color of rect displayed
+                    
+                    rect(xpos, ypos, 188, 45)
+                    
+                    player_buttons[player_start] = [xpos, ypos, xpos + 188, ypos + 45, player]
+                
+                    fill(255)  # set color of name displayed
+                        
+                    text(player.get_name(), xpos + 55, ypos + 33)  # display players name
+                    
+                    fill(*player.get_color())  # fill with players color
+                    rect(xpos, ypos, 45, 45)  # create rect with players color
+                    
+                    ypos += 51  # add to ypos, 54 is size of image + 20 for the margin at the botton of each player
+                    player_start += 1
         
     
     # next turn button

@@ -111,6 +111,12 @@ class Controller:
 
     def is_attacking(self):
         return self._player_attack[0]
+    
+    def get_player_attacking(self):
+        return self._player_attack[1]
+    
+    def set_player_attacking(self, player):
+        self._player_attack[1] = player
 
     def start_attack(self):
         self._player_attack[0] = True
