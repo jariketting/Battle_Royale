@@ -45,8 +45,8 @@ class Controller:
         [244, 225, 48],  # yellow
         [161, 0, 183],  # purple
         [191, 92, 0],  # orange
-        [255, 255, 255],  # black
-        [0, 0, 0]  # white
+        [63, 63, 63],  # black
+        [242, 242, 242]  # white
     ]
 
     # turn to next round
