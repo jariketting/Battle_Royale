@@ -152,25 +152,30 @@ def mouseReleased():
                     if len(controller.get_players()) > 1:
                         controller.remove_player(-1)
             elif state == 2:
+                turn_state = controller.get_turn_state()
+                
                 if not controller.is_attacking():
                     card_start = 10
                     item_start = 16
                     
-                    if button == 3:
+                    if button == 3 and turn_state == 0:
+                        controller.set_turn_state(1)
                         timer = 50
                         print('dice')
-                    elif button == 5:
+                    elif button == 5 and (turn_state == 1 or turn_state == 2):
                         controller.next_turn()
                         print('next turn')
                         
-                    elif button == card_start + 1 and controller.get_current_player().get_weapon():
+                    elif button == card_start + 1 and controller.get_current_player().get_weapon() and turn_state == 0:
                         controller.start_attack()
+                        controller.set_turn_state(1)
                         print('click weapon')
                     elif button == card_start and controller.get_current_player().get_weapon():
                         controller.get_current_player().set_weapon(None)
                         print('del weapon')
                         
-                    elif button == card_start + 3 and controller.get_current_player().get_first_item():
+                    elif button == card_start + 3 and controller.get_current_player().get_first_item() and turn_state == 1:
+                        controller.set_turn_state(2)
                         controller.get_current_player().get_first_item().use(controller.get_current_player())
                         controller.get_current_player().set_first_item(None)
                         print('click first item')
@@ -178,7 +183,8 @@ def mouseReleased():
                         controller.get_current_player().set_first_item(None)
                         print('del first item')
                         
-                    elif button == card_start + 5 and controller.get_current_player().get_second_item():
+                    elif button == card_start + 5 and controller.get_current_player().get_second_item() and turn_state == 1:
+                        controller.set_turn_state(2)
                         controller.get_current_player().get_second_item().use(controller.get_current_player())
                         controller.get_current_player().set_second_item(None)
                         print('click second item')
@@ -220,6 +226,7 @@ def mouseReleased():
                     
                     if button == 6:
                         controller.reset_player_attack()
+                        controller.set_turn_state(0)
                         print('attacking stopped')
                     elif button >= player_start:
                         controller.set_player_attacking(cords[4])
@@ -227,6 +234,7 @@ def mouseReleased():
                 elif controller.get_player_attacking():
                     if button == 6:
                         controller.reset_player_attack()
+                        controller.set_turn_state(0)
                         print('attacking stopped')
                     elif button == 7:
                         controller.attack_player(0)

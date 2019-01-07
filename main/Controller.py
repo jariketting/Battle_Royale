@@ -16,7 +16,8 @@ class Controller:
     _players = []  # stores players in game
     _current_player = 0  # stores player playing
     _move_radiation_zone = False  # stores move state of radiation zone
-    _radzone = 0
+    _radzone = 0  # stores radiation zone state
+    _turn_state = 0  # stores state of turn (0 = player can choose dice or weapon, 1 = player can use item, 2 = no actions allowed)
     
     _player_attack = [
         False,  # stores if player is attacking
@@ -59,6 +60,7 @@ class Controller:
 
     def next_turn(self):
         self.reset_player_attack()
+        self._turn_state = 0
         
         if self._current_player < len(self.get_players()) - 1:
             self._current_player += 1
@@ -71,8 +73,15 @@ class Controller:
         if self.get_current_player().is_dead():
             self.next_turn()
 
-    def get_turn(self):
-        return self._turn
+    def set_turn_state(self, value):
+        # make sure any wrong values are impossible to set
+        if value < 0 or value >= 3:
+            value = 0
+
+        self._turn_state = value
+
+    def get_turn_state(self):
+        return self._turn_state
 
     def _roll_radiation_zone(self):
         if random.randrange(1, 3) == 1:
