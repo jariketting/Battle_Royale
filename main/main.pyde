@@ -293,7 +293,7 @@ def player_screen():
     for player in controller.get_players():
         image(player_image, xpos, ypos)
         
-        fill(255)  # set color of name displayed
+        fill(0)  # set color of name displayed
         text(player.get_name(), xpos + 67, ypos + 37)  # display players name
         
         fill(*player.get_color())  # fill with players color
