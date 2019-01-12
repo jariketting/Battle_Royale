@@ -18,6 +18,7 @@ class Controller:
     _move_radiation_zone = False  # stores move state of radiation zone
     _radzone = 0  # stores radiation zone state
     _turn_state = 0  # stores state of turn (0 = player can choose dice or weapon, 1 = player can use item, 2 = no actions allowed)
+    _radion_damage_done = False
     
     _player_attack = [
         False,  # stores if player is attacking
@@ -61,6 +62,7 @@ class Controller:
     def next_turn(self):
         self.reset_player_attack()
         self._turn_state = 0
+        self._radion_damage_done = False
         
         if self._current_player < len(self.get_players()) - 1:
             self._current_player += 1
@@ -132,6 +134,14 @@ class Controller:
     def start_attack(self):
         self._player_attack[0] = True
 
+    def do_radiation_zone_damage(self):
+        if not self._radion_damage_done:
+            self.get_current_player().do_damage(2)
+            self._radion_damage_done = True
+            
+            if self.get_current_player().is_dead():
+                self.next_turn()
+        
     def get_radzone(self):
         return self._radzone
     

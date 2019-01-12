@@ -28,7 +28,8 @@ buttons = [
     [0, 0, 0, 0],  # close attack button
     [0, 0, 0, 0],  # 0 tiles button
     [0, 0, 0, 0],  # 1 tile button
-    [0, 0, 0, 0]  # 2 tiles button
+    [0, 0, 0, 0],  # 2 tiles button
+    [0, 0, 0, 0]  # radiation zone damage button
 ]
 
 #stores item buttons
@@ -155,8 +156,8 @@ def mouseReleased():
                 turn_state = controller.get_turn_state()
                 
                 if not controller.is_attacking():
-                    card_start = 10
-                    item_start = 16
+                    card_start = 11
+                    item_start = 17
                     
                     if button == 3 and turn_state == 0:
                         controller.set_turn_state(1)
@@ -221,8 +222,13 @@ def mouseReleased():
                     elif button == item_start + 8  and not controller.get_current_player().get_second_item():
                         controller.get_current_player().set_second_item(Items.FirstAidKit())
                         print('med kit 2')
+                        
+                    elif button == 10:
+                        controller.do_radiation_zone_damage()                        
+                        print('radiation zone damage')
+                    
                 elif not controller.get_player_attacking():
-                    player_start = 25
+                    player_start = 26
                     
                     if button == 6:
                         controller.reset_player_attack()
@@ -334,6 +340,9 @@ def main_screen():
         
     buttons[3] = [1142, 483, 1283, 624]
     image(dices[roll-1], 1142, 483, 141, 141)
+    
+    # radiation zone damage button
+    buttons[10] = [22, 36, 182, 196]
     
     # draw main screen image
     bg = loadImage(image_dir+"main_screen/bg.png")
